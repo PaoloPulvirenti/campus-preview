@@ -351,8 +351,8 @@
 
 <script>
   (function(){
-    // >>> IMPOSTA QUI LA TUA EMAIL (dove riceverai le richieste) <<<
-    var CONTACT_EMAIL = "paolo.pulvirenti31@gmail.com";
+    // >>> Web3Forms access key (le richieste arrivano sull'email collegata alla key) <<<
+    var WEB3FORMS_KEY = "80893bea-f4fb-4d73-b580-9d125fa374a6";
 
     var form=document.getElementById('leadForm');
     var btn=document.getElementById('leadBtn');
@@ -368,15 +368,17 @@
       }
       btn.disabled=true; var old=btn.innerHTML; btn.innerHTML='Invio in corso…';
       var payload={
-        nome:form.nome.value, scuola:form.scuola.value, email:form.email.value,
-        telefono:form.telefono.value||'—', messaggio:form.messaggio.value||'—',
-        _subject:'Nuova richiesta demo — Presidium ('+form.scuola.value+')'
+        access_key:WEB3FORMS_KEY,
+        name:form.nome.value, scuola:form.scuola.value, email:form.email.value,
+        telefono:form.telefono.value||'—', message:form.messaggio.value||'—',
+        subject:'Nuova richiesta demo — Presidium ('+form.scuola.value+')'
       };
-      fetch('https://formsubmit.co/ajax/'+CONTACT_EMAIL,{
+      fetch('https://api.web3forms.com/submit',{
         method:'POST',
         headers:{'Content-Type':'application/json','Accept':'application/json'},
         body:JSON.stringify(payload)
-      }).then(function(r){return r.json()}).then(function(){
+      }).then(function(r){return r.json()}).then(function(data){
+        if(!data.success){throw new Error(data.message||'fail');}
         form.style.display='none'; ok.style.display='block';
         ok.scrollIntoView({block:'center',behavior:'smooth'});
       }).catch(function(){
