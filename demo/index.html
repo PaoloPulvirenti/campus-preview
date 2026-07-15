@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CampusApp — anteprima del nuovo design (dati di esempio)">
+<title>CampusApp — Anteprima Redesign</title>
+<style>
+  :root{
+    --bg:#EEF1F4; --surface:#FFFFFF; --surface-2:#F6F8FA; --surface-3:#EFF2F5;
+    --border:#E3E7EC; --border-strong:#D3D9E0;
+    --text:#0F1720; --text-muted:#5C6874; --text-subtle:#93A0AD;
+    --brand:#0E7C7B; --brand-strong:#0A5D5C; --brand-soft:#E1F1F0; --on-brand:#FFFFFF;
+    --success:#0F7A45; --success-soft:#E6F6EC;
+    --warning:#B45309; --warning-soft:#FBF0DD;
+    --danger:#C0392B; --danger-soft:#FBEAE7;
+    --info:#1D63C7; --info-soft:#E7F0FC;
+    --violet:#6D4AC4; --violet-soft:#EEE9FA;
+    --sidebar-bg:#0C1A1F; --sidebar-2:#12242A; --sidebar-text:#AEBBC2;
+    --sidebar-muted:#6E828B; --sidebar-active:#1B3A3B; --sidebar-brand:#3BD6C6;
+    --ring:rgba(14,124,123,.35);
+    --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+    --shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04);
+    --shadow-md:0 8px 24px -6px rgba(16,24,40,.12),0 2px 6px rgba(16,24,40,.05);
+    --r-sm:8px; --r:12px; --r-lg:16px;
+    --ff:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"SF Mono",ui-monospace,"Cascadia Code",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0A0E12; --surface:#141A20; --surface-2:#1A222A; --surface-3:#202A33;
+      --border:#232E38; --border-strong:#2E3A45;
+      --text:#E7ECF1; --text-muted:#93A2AF; --text-subtle:#67757F;
+      --brand:#2DD4BF; --brand-strong:#5EEAD9; --brand-soft:rgba(45,212,191,.13); --on-brand:#04211F;
+      --success:#4ADE80; --success-soft:rgba(74,222,128,.13);
+      --warning:#FBBF77; --warning-soft:rgba(251,191,119,.12);
+      --danger:#F98A7D; --danger-soft:rgba(249,138,125,.12);
+      --info:#7FB0F5; --info-soft:rgba(127,176,245,.12);
+      --violet:#B39DF0; --violet-soft:rgba(179,157,240,.12);
+      --sidebar-bg:#080F12; --sidebar-2:#0E1A1F; --sidebar-text:#A4B2BA;
+      --sidebar-muted:#607179; --sidebar-active:#12302F; --sidebar-brand:#3BD6C6;
+      --ring:rgba(45,212,191,.4);
+      --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+      --shadow:0 1px 3px rgba(0,0,0,.5);
+      --shadow-md:0 12px 30px -8px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#EEF1F4; --surface:#FFFFFF; --surface-2:#F6F8FA; --surface-3:#EFF2F5;
+    --border:#E3E7EC; --border-strong:#D3D9E0;
+    --text:#0F1720; --text-muted:#5C6874; --text-subtle:#93A0AD;
+    --brand:#0E7C7B; --brand-strong:#0A5D5C; --brand-soft:#E1F1F0; --on-brand:#FFFFFF;
+    --success:#0F7A45; --success-soft:#E6F6EC; --warning:#B45309; --warning-soft:#FBF0DD;
+    --danger:#C0392B; --danger-soft:#FBEAE7; --info:#1D63C7; --info-soft:#E7F0FC;
+    --violet:#6D4AC4; --violet-soft:#EEE9FA;
+    --sidebar-bg:#0C1A1F; --sidebar-2:#12242A; --sidebar-text:#AEBBC2;
+    --sidebar-muted:#6E828B; --sidebar-active:#1B3A3B; --sidebar-brand:#3BD6C6;
+    --ring:rgba(14,124,123,.35);
+    --shadow:0 1px 3px rgba(16,24,40,.08),0 1px 2px rgba(16,24,40,.04);
+    --shadow-md:0 8px 24px -6px rgba(16,24,40,.12),0 2px 6px rgba(16,24,40,.05);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0E12; --surface:#141A20; --surface-2:#1A222A; --surface-3:#202A33;
+    --border:#232E38; --border-strong:#2E3A45;
+    --text:#E7ECF1; --text-muted:#93A2AF; --text-subtle:#67757F;
+    --brand:#2DD4BF; --brand-strong:#5EEAD9; --brand-soft:rgba(45,212,191,.13); --on-brand:#04211F;
+    --success:#4ADE80; --success-soft:rgba(74,222,128,.13); --warning:#FBBF77; --warning-soft:rgba(251,191,119,.12);
+    --danger:#F98A7D; --danger-soft:rgba(249,138,125,.12); --info:#7FB0F5; --info-soft:rgba(127,176,245,.12);
+    --violet:#B39DF0; --violet-soft:rgba(179,157,240,.12);
+    --sidebar-bg:#080F12; --sidebar-2:#0E1A1F; --sidebar-text:#A4B2BA;
+    --sidebar-muted:#607179; --sidebar-active:#12302F; --sidebar-brand:#3BD6C6;
+    --ring:rgba(45,212,191,.4);
+    --shadow:0 1px 3px rgba(0,0,0,.5); --shadow-md:0 12px 30px -8px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  .cx-wrap{font-family:var(--ff);color:var(--text);background:var(--bg);min-height:100vh;
+    font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .cx-wrap *{font-variant-ligatures:none}
+  svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;
+    stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* App shell */
+  .app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+  /* Sidebar */
+  .side{background:var(--sidebar-bg);color:var(--sidebar-text);display:flex;flex-direction:column;
+    padding:18px 14px;gap:6px;position:sticky;top:0;height:100vh}
+  .brand{display:flex;align-items:center;gap:11px;padding:6px 8px 16px}
+  .brand-badge{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--sidebar-brand),#0E7C7B);color:#04211F;box-shadow:0 4px 12px rgba(59,214,198,.3)}
+  .brand-badge svg{width:22px;height:22px;stroke:#04211F;stroke-width:2}
+  .brand-name{font-weight:700;font-size:15px;color:#fff;letter-spacing:-.2px;line-height:1.15}
+  .brand-sub{font-size:11px;color:var(--sidebar-muted);letter-spacing:.3px}
+  .nav-label{font-size:10.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
+    color:var(--sidebar-muted);padding:14px 10px 6px}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;
+    color:var(--sidebar-text);cursor:pointer;font-weight:500;font-size:13.5px;border:none;background:none;
+    width:100%;text-align:left;transition:background .15s,color .15s;position:relative}
+  .nav-item svg{width:18px;height:18px;opacity:.85}
+  .nav-item:hover{background:var(--sidebar-2);color:#fff}
+  .nav-item.on{background:var(--sidebar-active);color:#fff}
+  .nav-item.on::before{content:"";position:absolute;left:-14px;top:8px;bottom:8px;width:3px;
+    border-radius:0 3px 3px 0;background:var(--sidebar-brand)}
+  .nav-item.on svg{opacity:1;color:var(--sidebar-brand)}
+  .nav-lock{margin-left:auto;width:14px!important;height:14px!important;opacity:.5}
+  .side-spacer{flex:1}
+  .side-user{display:flex;align-items:center;gap:10px;padding:10px;border-radius:11px;background:var(--sidebar-2);
+    margin-top:6px}
+  .avatar{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;font-weight:600;
+    font-size:12.5px;color:#fff;letter-spacing:.3px}
+  .side-user .avatar{background:linear-gradient(140deg,#0E7C7B,#12545A)}
+  .side-user-meta{min-width:0}
+  .side-user-name{font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .role-chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;
+    color:var(--sidebar-brand);background:rgba(59,214,198,.12);padding:1px 7px;border-radius:20px;margin-top:2px}
+  .role-chip .dot{width:5px;height:5px;border-radius:50%;background:var(--sidebar-brand)}
+
+  /* Main */
+  .main{min-width:0;display:flex;flex-direction:column}
+  .topbar{display:flex;align-items:center;gap:14px;padding:14px 26px;background:color-mix(in srgb,var(--surface) 82%,transparent);
+    border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
+  .crumbs{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted);font-weight:500}
+  .crumbs b{color:var(--text);font-weight:600}
+  .crumbs svg{width:15px;height:15px;color:var(--text-subtle)}
+  .search{margin-left:6px;flex:1;max-width:360px;display:flex;align-items:center;gap:9px;
+    background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:8px 12px;color:var(--text-subtle)}
+  .search input{border:none;background:none;outline:none;color:var(--text);font-family:inherit;font-size:13.5px;width:100%}
+  .search kbd{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--text-subtle);
+    background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+  .top-actions{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--surface);
+    color:var(--text-muted);display:grid;place-items:center;cursor:pointer;position:relative;transition:.15s}
+  .icon-btn:hover{color:var(--text);border-color:var(--border-strong);background:var(--surface-2)}
+  .icon-btn .badge-dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;
+    background:var(--danger);border:2px solid var(--surface)}
+
+  .content{padding:26px;display:flex;flex-direction:column;gap:22px;max-width:1180px;width:100%}
+  .demo-note{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--text-muted);
+    background:var(--brand-soft);border:1px solid color-mix(in srgb,var(--brand) 25%,transparent);
+    color:var(--brand-strong);padding:8px 13px;border-radius:10px;font-weight:500}
+  .demo-note svg{width:16px;height:16px;color:var(--brand)}
+
+  .page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .page-title{font-size:23px;font-weight:700;letter-spacing:-.5px;text-wrap:balance}
+  .page-desc{color:var(--text-muted);font-size:13.5px;margin-top:3px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:inherit;font-size:13.5px;font-weight:600;
+    padding:9px 15px;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:.15s;white-space:nowrap}
+  .btn svg{width:17px;height:17px}
+  .btn-primary{background:var(--brand);color:var(--on-brand);box-shadow:0 1px 2px rgba(14,124,123,.3)}
+  .btn-primary:hover{background:var(--brand-strong)}
+  .btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border)}
+  .btn-ghost:hover{background:var(--surface-2);border-color:var(--border-strong)}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow)}
+  .card-pad{padding:18px}
+  .card-head{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--border)}
+  .card-head h3{font-size:14.5px;font-weight:650}
+  .card-head .link{font-size:12.5px;color:var(--brand);font-weight:600;cursor:pointer}
+
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .kpi{position:relative;overflow:hidden}
+  .kpi-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .kpi-ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center}
+  .kpi-ico svg{width:19px;height:19px}
+  .kpi-label{font-size:12.5px;color:var(--text-muted);font-weight:550}
+  .kpi-val{font-size:29px;font-weight:750;letter-spacing:-1px;line-height:1}
+  .kpi-foot{display:flex;align-items:center;gap:6px;margin-top:9px;font-size:12px;color:var(--text-muted)}
+  .trend{display:inline-flex;align-items:center;gap:3px;font-weight:650;padding:1px 6px;border-radius:20px;font-size:11.5px}
+  .trend svg{width:13px;height:13px}
+  .trend.up{color:var(--success);background:var(--success-soft)}
+  .trend.down{color:var(--danger);background:var(--danger-soft)}
+  .spark{position:absolute;right:14px;top:16px;width:66px;height:30px;opacity:.9}
+
+  .grid-2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px}
+  .chart-wrap{padding:6px 18px 18px}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--text-muted);padding:0 4px 8px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+
+  /* Expiring list */
+  .exp{display:flex;flex-direction:column}
+  .exp-row{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--border)}
+  .exp-row:last-child{border-bottom:none}
+  .exp-name{font-weight:600;font-size:13.5px}
+  .exp-sub{font-size:12px;color:var(--text-muted)}
+  .exp-right{margin-left:auto;text-align:right}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:20px}
+  .pill.warn{color:var(--warning);background:var(--warning-soft)}
+  .pill.danger{color:var(--danger);background:var(--danger-soft)}
+  .pill.ok{color:var(--success);background:var(--success-soft)}
+  .pill.info{color:var(--info);background:var(--info-soft)}
+  .pill.violet{color:var(--violet);background:var(--violet-soft)}
+  .pill.neutral{color:var(--text-muted);background:var(--surface-3)}
+  .pill .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+  /* Activity + quick */
+  .grid-2b{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .feed{display:flex;flex-direction:column;padding:6px 0}
+  .feed-row{display:flex;gap:12px;padding:11px 18px}
+  .feed-ico{width:32px;height:32px;border-radius:9px;flex:none;display:grid;place-items:center}
+  .feed-ico svg{width:16px;height:16px}
+  .feed-txt{font-size:13px}
+  .feed-txt b{font-weight:650}
+  .feed-time{font-size:11.5px;color:var(--text-subtle);margin-top:1px}
+  .quick{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:18px}
+  .quick-btn{display:flex;flex-direction:column;gap:9px;padding:15px;border-radius:var(--r);border:1px solid var(--border);
+    background:var(--surface-2);cursor:pointer;transition:.15s;text-align:left}
+  .quick-btn:hover{border-color:var(--brand);background:var(--brand-soft)}
+  .quick-btn .qi{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--surface);
+    border:1px solid var(--border);color:var(--brand)}
+  .quick-btn .qi svg{width:18px;height:18px}
+  .quick-btn b{font-size:13.5px;font-weight:600}
+  .quick-btn span{font-size:12px;color:var(--text-muted)}
+
+  /* Toolbar */
+  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .field{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:8px 12px;color:var(--text-subtle)}
+  .field svg{width:16px;height:16px}
+  .field input{border:none;background:none;outline:none;color:var(--text);font-family:inherit;font-size:13.5px;width:190px}
+  .select{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:8px 12px;font-size:13.5px;font-weight:500;color:var(--text);cursor:pointer}
+  .select svg{width:15px;height:15px;color:var(--text-muted)}
+  .toolbar .spacer{flex:1}
+
+  /* Table */
+  .tbl-wrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
+  thead th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+    color:var(--text-subtle);padding:12px 18px;border-bottom:1px solid var(--border);background:var(--surface-2)}
+  tbody td{padding:13px 18px;border-bottom:1px solid var(--border)}
+  tbody tr{transition:background .12s}
+  tbody tr:hover{background:var(--surface-2)}
+  tbody tr:last-child td{border-bottom:none}
+  .cell-name{display:flex;align-items:center;gap:11px}
+  .cell-name .avatar{width:36px;height:36px;font-size:12px}
+  .cell-name b{font-weight:600;display:block}
+  .cell-name small{color:var(--text-muted);font-size:12px}
+  .row-actions{display:flex;gap:4px;opacity:.4;transition:opacity .12s}
+  tr:hover .row-actions{opacity:1}
+  .row-actions button{width:30px;height:30px;border-radius:8px;border:1px solid transparent;background:none;
+    color:var(--text-muted);display:grid;place-items:center;cursor:pointer}
+  .row-actions button:hover{background:var(--surface-3);color:var(--text);border-color:var(--border)}
+  .row-actions button.del:hover{color:var(--danger);background:var(--danger-soft)}
+  .tbl-foot{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;font-size:12.5px;color:var(--text-muted)}
+  .pager{display:flex;gap:4px}
+  .pager button{min-width:31px;height:31px;border-radius:8px;border:1px solid var(--border);background:var(--surface);
+    color:var(--text-muted);cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:500;padding:0 8px}
+  .pager button.on{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+
+  .avatar.c1{background:linear-gradient(140deg,#0E7C7B,#12545A)}
+  .avatar.c2{background:linear-gradient(140deg,#6D4AC4,#4A34A0)}
+  .avatar.c3{background:linear-gradient(140deg,#B45309,#8A3E06)}
+  .avatar.c4{background:linear-gradient(140deg,#1D63C7,#164B9B)}
+  .avatar.c5{background:linear-gradient(140deg,#0F7A45,#0A5A33)}
+  .avatar.c6{background:linear-gradient(140deg,#C0392B,#95271C)}
+
+  /* Filter pills (documenti) */
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:12.5px;font-weight:550;padding:7px 13px;border-radius:20px;border:1px solid var(--border);
+    background:var(--surface);color:var(--text-muted);cursor:pointer;transition:.13s;display:inline-flex;align-items:center;gap:7px}
+  .chip:hover{border-color:var(--border-strong);color:var(--text)}
+  .chip.on{background:var(--brand);color:var(--on-brand);border-color:var(--brand)}
+  .chip .ct{background:color-mix(in srgb,currentColor 16%,transparent);border-radius:20px;padding:0 6px;font-size:11px;font-weight:650}
+
+  .doc-ico{width:40px;height:40px;border-radius:10px;flex:none;display:grid;place-items:center}
+  .doc-ico svg{width:20px;height:20px}
+  .screen{display:none;animation:fade .25s ease}
+  .screen.on{display:flex;flex-direction:column;gap:22px}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  button:focus-visible,.nav-item:focus-visible,.chip:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  /* mini stats */
+  .mini-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .mini-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:15px 17px;box-shadow:var(--shadow)}
+  .mini-stat .l{font-size:12px;color:var(--text-muted);font-weight:550;display:flex;align-items:center;gap:7px}
+  .mini-stat .l svg{width:15px;height:15px}
+  .mini-stat .v{font-size:24px;font-weight:750;letter-spacing:-.6px;margin-top:7px}
+  .mini-stat .v small{font-size:14px;color:var(--text-subtle);font-weight:600}
+
+  /* calendar */
+  .cal-toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .month-nav{display:inline-flex;align-items:center;gap:8px;font-weight:650;font-size:15px}
+  .month-nav button{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface);
+    color:var(--text-muted);display:grid;place-items:center;cursor:pointer}
+  .month-nav button:hover{background:var(--surface-2);color:var(--text)}
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+  .cal-hd{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text-subtle);text-align:center;padding:2px 0 4px}
+  .cal-cell{min-height:76px;border:1px solid var(--border);border-radius:10px;padding:9px;display:flex;flex-direction:column;background:var(--surface)}
+  .cal-day{font-size:13px;font-weight:650;color:var(--text)}
+  .cal-h{font-size:12.5px;color:var(--brand);font-weight:650;margin-top:auto}
+  .cal-tag{font-size:10.5px;font-weight:650;margin-top:auto;padding:2px 7px;border-radius:6px;align-self:flex-start}
+  .cal-cell.wknd{background:var(--surface-2);border-style:dashed}
+  .cal-cell.wknd .cal-day,.cal-cell.fut .cal-day{color:var(--text-subtle);font-weight:600}
+  .cal-cell.blank{background:none;border:none}
+  .cal-cell.absent{background:var(--danger-soft);border-color:transparent}
+  .cal-cell.absent .cal-tag{background:var(--danger);color:#fff}
+  .cal-cell.just{background:var(--info-soft);border-color:transparent}
+  .cal-cell.just .cal-tag{background:var(--info);color:#fff}
+  .cal-cell.today{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+  .cal-cell.today .cal-day{color:var(--brand)}
+  .cal-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text-muted);padding:2px}
+  .cal-legend span{display:inline-flex;align-items:center;gap:6px}
+  .cal-legend i{width:11px;height:11px;border-radius:4px;display:inline-block}
+
+  /* email two-pane */
+  .two-pane{display:grid;grid-template-columns:1fr 1.15fr;gap:16px;align-items:start}
+  .mail-row{display:flex;gap:12px;padding:13px 18px;border-bottom:1px solid var(--border);cursor:pointer}
+  .mail-row:last-child{border-bottom:none}
+  .mail-row:hover{background:var(--surface-2)}
+  .mail-ico{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;background:var(--surface-3);color:var(--text-muted)}
+  .mail-ico svg{width:16px;height:16px}
+  .mail-subj{font-weight:600;font-size:13.5px}
+  .mail-meta{font-size:12px;color:var(--text-muted);margin-top:2px}
+  .mail-right{margin-left:auto;text-align:right;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+  .mail-date{font-size:11.5px;color:var(--text-subtle)}
+  .form-group{display:flex;flex-direction:column;gap:6px;padding:14px 18px 0}
+  .form-group:last-of-type{padding-bottom:0}
+  .form-group label{font-size:12px;font-weight:600;color:var(--text-muted)}
+  .input,.textarea{font-family:inherit;font-size:13.5px;color:var(--text);background:var(--surface-2);
+    border:1px solid var(--border);border-radius:9px;padding:9px 12px;outline:none;width:100%;transition:.15s}
+  .input:focus,.textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--ring);background:var(--surface)}
+  .textarea{resize:vertical;min-height:130px;line-height:1.55}
+  .compose-foot{display:flex;align-items:center;gap:10px;padding:16px 18px}
+  .attach{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-muted);
+    background:var(--surface-2);border:1px dashed var(--border-strong);border-radius:8px;padding:8px 12px}
+  .attach svg{width:15px;height:15px}
+
+  /* permissions matrix */
+  table.perm{min-width:420px}
+  table.perm td:not(:first-child),table.perm th:not(:first-child){text-align:center;width:130px}
+  table.perm td svg{width:18px;height:18px}
+  .yes{color:var(--success)}
+  .no{color:var(--text-subtle);opacity:.55}
+
+  @media (max-width:1080px){.kpis{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-2b,.two-pane{grid-template-columns:1fr}.mini-stats{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:720px){
+    .app{grid-template-columns:1fr}
+    .side{position:fixed;left:-260px;z-index:50}
+    .search{display:none}.content{padding:16px}
+  }
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="ic-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="ic-euro" viewBox="0 0 24 24"><path d="M17 6.5A6 6 0 0 0 7 11m10 6.5A6 6 0 0 1 7 13"/><path d="M4 10h9M4 14h8"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></symbol>
+  <symbol id="ic-contract" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></symbol>
+  <symbol id="ic-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="ic-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="ic-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="ic-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="ic-chevd" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="ic-edit" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+  <symbol id="ic-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></symbol>
+  <symbol id="ic-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="ic-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="ic-up" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="ic-down" viewBox="0 0 24 24"><path d="M7 7 17 17M17 8v9H8"/></symbol>
+  <symbol id="ic-alert" viewBox="0 0 24 24"><path d="M10.3 3.2 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.2a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="ic-dl" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="ic-filter" viewBox="0 0 24 24"><path d="M22 3H2l8 9.5V19l4 2v-8.5z"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/></symbol>
+  <symbol id="ic-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></symbol>
+  <symbol id="ic-fire" viewBox="0 0 24 24"><path d="M12 2s4 4 4 8a4 4 0 0 1-8 0c0-1 .5-2 1-3-2 1-4 3.5-4 7a7 7 0 0 0 14 0c0-6-7-9-7-12z"/></symbol>
+  <symbol id="ic-heart" viewBox="0 0 24 24"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-6.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="ic-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="ic-send" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+  <symbol id="ic-clip" viewBox="0 0 24 24"><path d="M21 11.5 12 20a5 5 0 0 1-7-7l9-9a3.5 3.5 0 0 1 5 5l-9 9a2 2 0 0 1-3-3l8-8"/></symbol>
+  <symbol id="ic-shield-user" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><circle cx="12" cy="10" r="2.2"/><path d="M8.5 16a3.5 3.5 0 0 1 7 0"/></symbol>
+</defs></svg>
+
+<div class="cx-wrap">
+  <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="side">
+      <div class="brand">
+        <div class="brand-badge"><svg viewBox="0 0 24 24"><use href="#ic-cap"/></svg></div>
+        <div><div class="brand-name">CampusApp</div><div class="brand-sub">Gestione Personale</div></div>
+      </div>
+      <div class="nav-label">Principale</div>
+      <button class="nav-item on" data-go="dash"><svg><use href="#ic-grid"/></svg>Dashboard</button>
+      <button class="nav-item" data-go="emp"><svg><use href="#ic-users"/></svg>Dipendenti</button>
+      <button class="nav-item" data-go="doc"><svg><use href="#ic-doc"/></svg>Documenti</button>
+      <button class="nav-item" data-go="contr"><svg><use href="#ic-contract"/></svg>Contratti</button>
+      <button class="nav-item" data-go="pres"><svg><use href="#ic-cal"/></svg>Presenze</button>
+      <button class="nav-item" data-go="mailp"><svg><use href="#ic-mail"/></svg>Email</button>
+      <div class="nav-label">Riservato · Direttore</div>
+      <button class="nav-item" data-go="pay"><svg><use href="#ic-euro"/></svg>Buste Paga <svg class="nav-lock"><use href="#ic-lock"/></svg></button>
+      <button class="nav-item" data-go="users"><svg><use href="#ic-shield"/></svg>Utenti &amp; Ruoli <svg class="nav-lock"><use href="#ic-lock"/></svg></button>
+      <div class="side-spacer"></div>
+      <div class="side-user">
+        <div class="avatar">PP</div>
+        <div class="side-user-meta">
+          <div class="side-user-name">Paolo Pulvirenti</div>
+          <span class="role-chip"><span class="dot"></span>Direttore</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <header class="topbar">
+        <nav class="crumbs"><span>CampusApp</span><svg><use href="#ic-chev"/></svg><b id="crumb">Dashboard</b></nav>
+        <label class="search"><svg class="i" style="width:16px;height:16px"><use href="#ic-search"/></svg>
+          <input placeholder="Cerca dipendenti, documenti…"><kbd>⌘K</kbd></label>
+        <div class="top-actions">
+          <button class="icon-btn" id="themeBtn" title="Cambia tema"><svg class="i"><use href="#ic-moon" id="themeUse"/></svg></button>
+          <button class="icon-btn" title="Notifiche"><svg class="i"><use href="#ic-bell"/></svg><span class="badge-dot"></span></button>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="demo-note"><svg><use href="#ic-eye"/></svg>Anteprima del nuovo design — dati di esempio. Passa da Dashboard / Dipendenti / Documenti dal menu a sinistra.</div>
+
+        <!-- ============ DASHBOARD ============ -->
+        <section class="screen on" id="dash">
+          <div class="page-head">
+            <div>
+              <h1 class="page-title">Buongiorno, Paolo 👋</h1>
+              <div class="page-desc">Ecco cosa succede oggi · Martedì 15 luglio 2026</div>
+            </div>
+            <button class="btn btn-primary"><svg><use href="#ic-plus"/></svg>Nuovo dipendente</button>
+          </div>
+
+          <div class="kpis">
+            <div class="card card-pad kpi">
+              <div class="kpi-top"><div class="kpi-ico" style="background:var(--brand-soft);color:var(--brand)"><svg><use href="#ic-users"/></svg></div><div class="kpi-label">Dipendenti attivi</div></div>
+              <div class="kpi-val num">24</div>
+              <div class="kpi-foot"><span class="trend up"><svg><use href="#ic-up"/></svg>+2</span>rispetto al mese scorso</div>
+              <svg class="spark" viewBox="0 0 66 30" preserveAspectRatio="none"><polyline points="0,24 11,22 22,23 33,17 44,18 55,10 66,6" fill="none" stroke="var(--brand)" stroke-width="2"/><circle cx="66" cy="6" r="2.6" fill="var(--brand)"/></svg>
+            </div>
+            <div class="card card-pad kpi">
+              <div class="kpi-top"><div class="kpi-ico" style="background:var(--info-soft);color:var(--info)"><svg><use href="#ic-contract"/></svg></div><div class="kpi-label">Contratti attivi</div></div>
+              <div class="kpi-val num">21</div>
+              <div class="kpi-foot"><span class="pill warn" style="padding:1px 7px"><span class="dot"></span>3 in scadenza</span></div>
+              <svg class="spark" viewBox="0 0 66 30" preserveAspectRatio="none"><polyline points="0,14 11,15 22,12 33,14 44,11 55,13 66,9" fill="none" stroke="var(--info)" stroke-width="2"/><circle cx="66" cy="9" r="2.6" fill="var(--info)"/></svg>
+            </div>
+            <div class="card card-pad kpi">
+              <div class="kpi-top"><div class="kpi-ico" style="background:var(--success-soft);color:var(--success)"><svg><use href="#ic-euro"/></svg></div><div class="kpi-label">Buste paga · Luglio</div></div>
+              <div class="kpi-val num">21<span style="font-size:16px;color:var(--text-subtle);font-weight:600">/24</span></div>
+              <div class="kpi-foot"><span class="trend up"><svg><use href="#ic-up"/></svg>88%</span>inviate</div>
+              <svg class="spark" viewBox="0 0 66 30" preserveAspectRatio="none"><polyline points="0,26 11,20 22,21 33,14 44,12 55,8 66,5" fill="none" stroke="var(--success)" stroke-width="2"/><circle cx="66" cy="5" r="2.6" fill="var(--success)"/></svg>
+            </div>
+            <div class="card card-pad kpi">
+              <div class="kpi-top"><div class="kpi-ico" style="background:var(--warning-soft);color:var(--warning)"><svg><use href="#ic-cal"/></svg></div><div class="kpi-label">Assenze · questo mese</div></div>
+              <div class="kpi-val num">3</div>
+              <div class="kpi-foot"><span class="trend down"><svg><use href="#ic-down"/></svg>-1</span>rispetto a giugno</div>
+              <svg class="spark" viewBox="0 0 66 30" preserveAspectRatio="none"><polyline points="0,10 11,14 22,12 33,16 44,15 55,19 66,22" fill="none" stroke="var(--warning)" stroke-width="2"/><circle cx="66" cy="22" r="2.6" fill="var(--warning)"/></svg>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-head"><h3>Ore lavorate · ultime settimane</h3><span class="pill neutral">Luglio 2026</span></div>
+              <div class="chart-wrap">
+                <div class="legend"><span><i style="background:var(--brand)"></i>Ore effettive</span><span><i style="background:var(--border-strong)"></i>Ore previste</span></div>
+                <svg viewBox="0 0 560 220" width="100%" height="220" role="img" aria-label="Grafico ore lavorate">
+                  <g stroke="var(--border)" stroke-width="1">
+                    <line x1="40" y1="20" x2="548" y2="20"/><line x1="40" y1="65" x2="548" y2="65"/>
+                    <line x1="40" y1="110" x2="548" y2="110"/><line x1="40" y1="155" x2="548" y2="155"/><line x1="40" y1="200" x2="548" y2="200"/>
+                  </g>
+                  <g fill="var(--text-subtle)" font-size="11" font-family="var(--ff)">
+                    <text x="30" y="204" text-anchor="end">0</text><text x="30" y="159" text-anchor="end">40</text>
+                    <text x="30" y="114" text-anchor="end">80</text><text x="30" y="69" text-anchor="end">120</text><text x="30" y="24" text-anchor="end">160</text>
+                  </g>
+                  <g font-size="11.5" fill="var(--text-muted)" font-family="var(--ff)" text-anchor="middle">
+                    <text x="90" y="215">Sett. 27</text><text x="190" y="215">Sett. 28</text><text x="290" y="215">Sett. 29</text><text x="390" y="215">Sett. 30</text><text x="490" y="215">Sett. 31</text>
+                  </g>
+                  <g>
+                    <rect x="72" y="70" width="16" height="130" rx="3" fill="var(--border-strong)"/><rect x="92" y="84" width="16" height="116" rx="3" fill="var(--brand)"/>
+                    <rect x="172" y="70" width="16" height="130" rx="3" fill="var(--border-strong)"/><rect x="192" y="76" width="16" height="124" rx="3" fill="var(--brand)"/>
+                    <rect x="272" y="70" width="16" height="130" rx="3" fill="var(--border-strong)"/><rect x="292" y="92" width="16" height="108" rx="3" fill="var(--brand)"/>
+                    <rect x="372" y="70" width="16" height="130" rx="3" fill="var(--border-strong)"/><rect x="392" y="72" width="16" height="128" rx="3" fill="var(--brand)"/>
+                    <rect x="472" y="70" width="16" height="130" rx="3" fill="var(--border-strong)"/><rect x="492" y="60" width="16" height="140" rx="3" fill="var(--brand-strong)"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><h3>Contratti in scadenza</h3><span class="link">Vedi tutti</span></div>
+              <div class="exp">
+                <div class="exp-row"><div class="avatar c3">GF</div><div><div class="exp-name">Giulia Ferro</div><div class="exp-sub">Tempo determinato</div></div><div class="exp-right"><span class="pill danger"><span class="dot"></span>7 giorni</span><div class="exp-sub num">31/07/2026</div></div></div>
+                <div class="exp-row"><div class="avatar c2">MB</div><div><div class="exp-name">Marco Bianchi</div><div class="exp-sub">Collaborazione</div></div><div class="exp-right"><span class="pill warn"><span class="dot"></span>23 giorni</span><div class="exp-sub num">16/08/2026</div></div></div>
+                <div class="exp-row"><div class="avatar c4">SR</div><div><div class="exp-name">Sara Romano</div><div class="exp-sub">Tempo determinato</div></div><div class="exp-right"><span class="pill warn"><span class="dot"></span>28 giorni</span><div class="exp-sub num">21/08/2026</div></div></div>
+                <div class="exp-row"><div class="avatar c5">LC</div><div><div class="exp-name">Luca Conti</div><div class="exp-sub">Apprendistato</div></div><div class="exp-right"><span class="pill ok"><span class="dot"></span>rinnovato</span><div class="exp-sub num">30/09/2026</div></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2b">
+            <div class="card">
+              <div class="card-head"><h3>Attività recenti</h3><span class="link">Storico</span></div>
+              <div class="feed">
+                <div class="feed-row"><div class="feed-ico" style="background:var(--success-soft);color:var(--success)"><svg><use href="#ic-euro"/></svg></div><div><div class="feed-txt"><b>21 buste paga</b> di Luglio elaborate e inviate</div><div class="feed-time">2 ore fa · Paolo P.</div></div></div>
+                <div class="feed-row"><div class="feed-ico" style="background:var(--info-soft);color:var(--info)"><svg><use href="#ic-doc"/></svg></div><div><div class="feed-txt">Caricato <b>Attestato Primo Soccorso</b> · Elena Serra</div><div class="feed-time">ieri · Segreteria</div></div></div>
+                <div class="feed-row"><div class="feed-ico" style="background:var(--brand-soft);color:var(--brand)"><svg><use href="#ic-users"/></svg></div><div><div class="feed-txt">Nuovo dipendente <b>Chiara De Luca</b> aggiunto</div><div class="feed-time">ieri · Segreteria</div></div></div>
+                <div class="feed-row"><div class="feed-ico" style="background:var(--violet-soft);color:var(--violet)"><svg><use href="#ic-contract"/></svg></div><div><div class="feed-txt">Rinnovato contratto di <b>Luca Conti</b></div><div class="feed-time">2 giorni fa · Paolo P.</div></div></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>Azioni rapide</h3></div>
+              <div class="quick">
+                <button class="quick-btn"><div class="qi"><svg><use href="#ic-plus"/></svg></div><b>Aggiungi dipendente</b><span>Anagrafica + contratto</span></button>
+                <button class="quick-btn"><div class="qi"><svg><use href="#ic-euro"/></svg></div><b>Carica buste paga</b><span>Import PDF multiplo</span></button>
+                <button class="quick-btn"><div class="qi"><svg><use href="#ic-doc"/></svg></div><b>Carica documento</b><span>Attestati, contratti…</span></button>
+                <button class="quick-btn"><div class="qi"><svg><use href="#ic-mail"/></svg></div><b>Invia comunicazione</b><span>Email ai dipendenti</span></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ DIPENDENTI ============ -->
+        <section class="screen" id="emp">
+          <div class="page-head">
+            <div><h1 class="page-title">Dipendenti</h1><div class="page-desc">24 persone · 21 con contratto attivo</div></div>
+            <button class="btn btn-primary"><svg><use href="#ic-plus"/></svg>Nuovo dipendente</button>
+          </div>
+          <div class="toolbar">
+            <label class="field"><svg><use href="#ic-search"/></svg><input placeholder="Cerca per nome o codice fiscale…"></label>
+            <span class="select">Tutti i ruoli <svg><use href="#ic-chevd"/></svg></span>
+            <span class="select">Contratto: tutti <svg><use href="#ic-chevd"/></svg></span>
+            <div class="spacer"></div>
+            <button class="btn btn-ghost"><svg><use href="#ic-filter"/></svg>Filtri</button>
+          </div>
+          <div class="card">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Dipendente</th><th>Ruolo</th><th>Contratto</th><th>Documenti</th><th>Stato</th><th style="text-align:right">Azioni</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="cell-name"><div class="avatar c1">ES</div><div><b>Elena Serra</b><small>SRRLNE88..C351U</small></div></div></td><td>Segreteria</td><td>Indeterminato</td><td class="num">6</td><td><span class="pill ok"><span class="dot"></span>Attivo</span></td><td><div class="row-actions" style="justify-content:flex-end"><button title="Vedi"><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button title="Modifica"><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del" title="Elimina"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c2">MB</div><div><b>Marco Bianchi</b><small>BNCMRC90..F205X</small></div></div></td><td>Docente</td><td>Collaborazione</td><td class="num">4</td><td><span class="pill warn"><span class="dot"></span>In scadenza</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c3">GF</div><div><b>Giulia Ferro</b><small>FRRGLI95..C351K</small></div></div></td><td>Docente</td><td>Tempo determinato</td><td class="num">8</td><td><span class="pill danger"><span class="dot"></span>Scade tra 7gg</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c5">CD</div><div><b>Chiara De Luca</b><small>DLCCHR98..H501Y</small></div></div></td><td>Docente</td><td>Indeterminato</td><td class="num">5</td><td><span class="pill ok"><span class="dot"></span>Attivo</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c4">VR</div><div><b>Valeria Rossi</b><small>RSSVLR92..A662P</small></div></div></td><td>Collaboratore</td><td>Part-time</td><td class="num">3</td><td><span class="pill ok"><span class="dot"></span>Attivo</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c6">LC</div><div><b>Luca Conti</b><small>CNTLCU99..C351R</small></div></div></td><td>Docente</td><td>Apprendistato</td><td class="num">7</td><td><span class="pill ok"><span class="dot"></span>Rinnovato</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tbl-foot"><span>1-6 di 24 dipendenti</span><div class="pager"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>4</button><button>›</button></div></div>
+          </div>
+        </section>
+
+        <!-- ============ DOCUMENTI ============ -->
+        <section class="screen" id="doc">
+          <div class="page-head">
+            <div><h1 class="page-title">Documenti</h1><div class="page-desc">143 documenti archiviati · organizzati per categoria</div></div>
+            <button class="btn btn-primary"><svg><use href="#ic-plus"/></svg>Carica documento</button>
+          </div>
+          <div class="chips">
+            <span class="chip on">Tutti <span class="ct">143</span></span>
+            <span class="chip"><svg class="i" style="width:15px;height:15px;color:var(--info)"><use href="#ic-contract"/></svg>Contratti in essere <span class="ct">21</span></span>
+            <span class="chip">Certificato idoneità <span class="ct">18</span></span>
+            <span class="chip"><svg class="i" style="width:15px;height:15px;color:var(--danger)"><use href="#ic-heart"/></svg>Primo soccorso <span class="ct">12</span></span>
+            <span class="chip"><svg class="i" style="width:15px;height:15px;color:var(--warning)"><use href="#ic-fire"/></svg>Antincendio <span class="ct">11</span></span>
+            <span class="chip">RSPP <span class="ct">6</span></span>
+            <span class="chip">RLS <span class="ct">5</span></span>
+            <span class="chip"><svg class="i" style="width:15px;height:15px;color:var(--violet)"><use href="#ic-cap"/></svg>Titolo di studio <span class="ct">24</span></span>
+            <span class="chip">Proroghe <span class="ct">9</span></span>
+          </div>
+          <div class="card">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Documento</th><th>Categoria</th><th>Dipendente</th><th>Caricato</th><th style="text-align:right">Azioni</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="cell-name"><div class="doc-ico" style="background:var(--danger-soft);color:var(--danger)"><svg><use href="#ic-doc"/></svg></div><div><b>Attestato_PrimoSoccorso_2026.pdf</b><small class="num">248 KB · PDF</small></div></div></td><td><span class="pill danger"><span class="dot"></span>Primo soccorso</span></td><td>Elena Serra</td><td class="num">14/07/2026</td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="doc-ico" style="background:var(--info-soft);color:var(--info)"><svg><use href="#ic-contract"/></svg></div><div><b>Contratto_Ferro_Giulia.pdf</b><small class="num">512 KB · PDF</small></div></div></td><td><span class="pill info"><span class="dot"></span>Contratti in essere</span></td><td>Giulia Ferro</td><td class="num">12/07/2026</td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="doc-ico" style="background:var(--warning-soft);color:var(--warning)"><svg><use href="#ic-fire"/></svg></div><div><b>Antincendio_Bianchi.pdf</b><small class="num">190 KB · PDF</small></div></div></td><td><span class="pill warn"><span class="dot"></span>Antincendio</span></td><td>Marco Bianchi</td><td class="num">09/07/2026</td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="doc-ico" style="background:var(--violet-soft);color:var(--violet)"><svg><use href="#ic-cap"/></svg></div><div><b>Laurea_DeLuca_Chiara.pdf</b><small class="num">1.2 MB · PDF</small></div></div></td><td><span class="pill violet"><span class="dot"></span>Titolo di studio</span></td><td>Chiara De Luca</td><td class="num">08/07/2026</td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="doc-ico" style="background:var(--success-soft);color:var(--success)"><svg><use href="#ic-shield"/></svg></div><div><b>RSPP_Rossi_Valeria.pdf</b><small class="num">330 KB · PDF</small></div></div></td><td><span class="pill ok"><span class="dot"></span>RSPP</span></td><td>Valeria Rossi</td><td class="num">05/07/2026</td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tbl-foot"><span>1-5 di 143 documenti</span><div class="pager"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>…</button><button>29</button><button>›</button></div></div>
+          </div>
+        </section>
+
+        <!-- ============ CONTRATTI ============ -->
+        <section class="screen" id="contr">
+          <div class="page-head">
+            <div><h1 class="page-title">Contratti</h1><div class="page-desc">21 attivi · 3 in scadenza nei prossimi 30 giorni</div></div>
+            <button class="btn btn-primary"><svg><use href="#ic-plus"/></svg>Nuovo contratto</button>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat"><div class="l"><svg style="color:var(--success)"><use href="#ic-contract"/></svg>Attivi</div><div class="v num">21</div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--warning)"><use href="#ic-alert"/></svg>In scadenza (30gg)</div><div class="v num">3</div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--info)"><use href="#ic-cal"/></svg>Rinnovi questo mese</div><div class="v num">2</div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--text-muted)"><use href="#ic-doc"/></svg>Scaduti (archivio)</div><div class="v num">14</div></div>
+          </div>
+          <div class="toolbar">
+            <label class="field"><svg><use href="#ic-search"/></svg><input placeholder="Cerca contratto o dipendente…"></label>
+            <span class="select">Tipo: tutti <svg><use href="#ic-chevd"/></svg></span>
+            <span class="select">Stato: tutti <svg><use href="#ic-chevd"/></svg></span>
+          </div>
+          <div class="card">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Dipendente</th><th>Tipo</th><th>Periodo</th><th>Ore/sett.</th><th>Stato</th><th style="text-align:right">Azioni</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="cell-name"><div class="avatar c3">GF</div><div><b>Giulia Ferro</b><small>Docente</small></div></div></td><td>Tempo determinato</td><td class="num">01/09/2025 – 31/07/2026</td><td class="num">30</td><td><span class="pill danger"><span class="dot"></span>Scade tra 7gg</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c2">MB</div><div><b>Marco Bianchi</b><small>Docente</small></div></div></td><td>Collaborazione</td><td class="num">16/02/2026 – 16/08/2026</td><td class="num">18</td><td><span class="pill warn"><span class="dot"></span>Scade tra 23gg</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c1">ES</div><div><b>Elena Serra</b><small>Segreteria</small></div></div></td><td>Indeterminato</td><td class="num">01/03/2022 – —</td><td class="num">40</td><td><span class="pill ok"><span class="dot"></span>Attivo</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c6">LC</div><div><b>Luca Conti</b><small>Docente</small></div></div></td><td>Apprendistato</td><td class="num">01/10/2025 – 30/09/2026</td><td class="num">36</td><td><span class="pill ok"><span class="dot"></span>Rinnovato</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c4">VR</div><div><b>Valeria Rossi</b><small>Collaboratore</small></div></div></td><td>Part-time</td><td class="num">01/01/2024 – —</td><td class="num">20</td><td><span class="pill ok"><span class="dot"></span>Attivo</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-eye"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tbl-foot"><span>1-5 di 21 contratti attivi</span><div class="pager"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>›</button></div></div>
+          </div>
+        </section>
+
+        <!-- ============ PRESENZE ============ -->
+        <section class="screen" id="pres">
+          <div class="page-head">
+            <div><h1 class="page-title">Presenze</h1><div class="page-desc">Registro ore e assenze · Elena Serra</div></div>
+            <div style="display:flex;gap:10px"><span class="select">Elena Serra <svg><use href="#ic-chevd"/></svg></span><button class="btn btn-ghost"><svg><use href="#ic-dl"/></svg>Esporta</button></div>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat"><div class="l"><svg style="color:var(--brand)"><use href="#ic-cal"/></svg>Ore lavorate (a oggi)</div><div class="v num">70<small> / 80</small></div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--danger)"><use href="#ic-alert"/></svg>Assenze</div><div class="v num">1</div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--info)"><use href="#ic-doc"/></svg>Ferie / Permessi</div><div class="v num">1</div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--success)"><use href="#ic-check"/></svg>Giorni completi</div><div class="v num">8</div></div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div class="month-nav"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-chev" transform="rotate(180 12 12)"/></svg></button>Luglio 2026<button><svg class="i" style="width:16px;height:16px"><use href="#ic-chev"/></svg></button></div>
+              <div class="cal-legend"><span><i style="background:var(--brand)"></i>Lavorato</span><span><i style="background:var(--danger)"></i>Assenza</span><span><i style="background:var(--info)"></i>Ferie/Permesso</span><span><i style="background:var(--surface-3);border:1px dashed var(--border-strong)"></i>Weekend</span></div>
+            </div>
+            <div class="card-pad">
+              <div class="cal" style="margin-bottom:8px">
+                <div class="cal-hd">Lun</div><div class="cal-hd">Mar</div><div class="cal-hd">Mer</div><div class="cal-hd">Gio</div><div class="cal-hd">Ven</div><div class="cal-hd">Sab</div><div class="cal-hd">Dom</div>
+              </div>
+              <div class="cal">
+                <div class="cal-cell blank"></div><div class="cal-cell blank"></div>
+                <div class="cal-cell"><span class="cal-day">1</span><span class="cal-h">8h</span></div>
+                <div class="cal-cell"><span class="cal-day">2</span><span class="cal-h">8h</span></div>
+                <div class="cal-cell absent"><span class="cal-day">3</span><span class="cal-tag">Assenza</span></div>
+                <div class="cal-cell wknd"><span class="cal-day">4</span></div><div class="cal-cell wknd"><span class="cal-day">5</span></div>
+
+                <div class="cal-cell"><span class="cal-day">6</span><span class="cal-h">8h</span></div>
+                <div class="cal-cell"><span class="cal-day">7</span><span class="cal-h">8h</span></div>
+                <div class="cal-cell"><span class="cal-day">8</span><span class="cal-h">8h</span></div>
+                <div class="cal-cell"><span class="cal-day">9</span><span class="cal-h">8h</span></div>
+                <div class="cal-cell just"><span class="cal-day">10</span><span class="cal-tag">Ferie</span></div>
+                <div class="cal-cell wknd"><span class="cal-day">11</span></div><div class="cal-cell wknd"><span class="cal-day">12</span></div>
+
+                <div class="cal-cell"><span class="cal-day">13</span><span class="cal-h">8h</span></div>
+                <div class="cal-cell"><span class="cal-day">14</span><span class="cal-h">8h</span></div>
+                <div class="cal-cell today"><span class="cal-day">15</span><span class="cal-h">6h</span></div>
+                <div class="cal-cell fut"><span class="cal-day">16</span></div>
+                <div class="cal-cell fut"><span class="cal-day">17</span></div>
+                <div class="cal-cell wknd"><span class="cal-day">18</span></div><div class="cal-cell wknd"><span class="cal-day">19</span></div>
+
+                <div class="cal-cell fut"><span class="cal-day">20</span></div><div class="cal-cell fut"><span class="cal-day">21</span></div><div class="cal-cell fut"><span class="cal-day">22</span></div><div class="cal-cell fut"><span class="cal-day">23</span></div><div class="cal-cell fut"><span class="cal-day">24</span></div>
+                <div class="cal-cell wknd"><span class="cal-day">25</span></div><div class="cal-cell wknd"><span class="cal-day">26</span></div>
+
+                <div class="cal-cell fut"><span class="cal-day">27</span></div><div class="cal-cell fut"><span class="cal-day">28</span></div><div class="cal-cell fut"><span class="cal-day">29</span></div><div class="cal-cell fut"><span class="cal-day">30</span></div><div class="cal-cell fut"><span class="cal-day">31</span></div>
+                <div class="cal-cell blank"></div><div class="cal-cell blank"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ EMAIL ============ -->
+        <section class="screen" id="mailp">
+          <div class="page-head">
+            <div><h1 class="page-title">Email</h1><div class="page-desc">Comunicazioni e invio buste paga ai dipendenti</div></div>
+          </div>
+          <div class="two-pane">
+            <div class="card">
+              <div class="card-head"><h3>Storico invii</h3><span class="link">Tutti</span></div>
+              <div>
+                <div class="mail-row"><div class="mail-ico"><svg><use href="#ic-euro"/></svg></div><div><div class="mail-subj">Busta paga Luglio 2026</div><div class="mail-meta">a Elena Serra</div></div><div class="mail-right"><span class="pill ok"><span class="dot"></span>Inviata</span><span class="mail-date num">2 ore fa</span></div></div>
+                <div class="mail-row"><div class="mail-ico"><svg><use href="#ic-doc"/></svg></div><div><div class="mail-subj">Richiesta documenti sicurezza</div><div class="mail-meta">a Marco Bianchi</div></div><div class="mail-right"><span class="pill ok"><span class="dot"></span>Inviata</span><span class="mail-date num">ieri</span></div></div>
+                <div class="mail-row"><div class="mail-ico"><svg><use href="#ic-mail"/></svg></div><div><div class="mail-subj">Convocazione riunione</div><div class="mail-meta">a 12 destinatari</div></div><div class="mail-right"><span class="pill ok"><span class="dot"></span>Inviata</span><span class="mail-date num">2 giorni fa</span></div></div>
+                <div class="mail-row"><div class="mail-ico"><svg><use href="#ic-euro"/></svg></div><div><div class="mail-subj">Busta paga Luglio 2026</div><div class="mail-meta">a Sara Romano</div></div><div class="mail-right"><span class="pill danger"><span class="dot"></span>Fallita</span><span class="mail-date num">2 giorni fa</span></div></div>
+                <div class="mail-row"><div class="mail-ico"><svg><use href="#ic-doc"/></svg></div><div><div class="mail-subj">Scadenza certificato idoneità</div><div class="mail-meta">a Giulia Ferro</div></div><div class="mail-right"><span class="pill neutral"><span class="dot"></span>Bozza</span><span class="mail-date num">3 giorni fa</span></div></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>Nuova comunicazione</h3></div>
+              <div class="form-group"><label>Destinatari</label><div class="select" style="justify-content:space-between">Seleziona dipendenti… <svg><use href="#ic-chevd"/></svg></div></div>
+              <div class="form-group"><label>Oggetto</label><input class="input" value="Comunicazione dalla Direzione"></div>
+              <div class="form-group"><label>Messaggio</label><textarea class="textarea">Gentile collega,
+scriviamo per informarti che…</textarea></div>
+              <div class="form-group"><span class="attach"><svg><use href="#ic-clip"/></svg>allegato_riunione.pdf · 240 KB</span></div>
+              <div class="compose-foot"><button class="btn btn-primary"><svg><use href="#ic-send"/></svg>Invia email</button><button class="btn btn-ghost">Salva bozza</button></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ BUSTE PAGA (Direttore) ============ -->
+        <section class="screen" id="pay">
+          <div class="page-head">
+            <div><h1 class="page-title">Buste Paga <span class="pill violet" style="vertical-align:middle;font-size:11px"><svg class="i" style="width:13px;height:13px"><use href="#ic-lock"/></svg>Solo Direttore</span></h1><div class="page-desc">Elaborazione e invio dei cedolini</div></div>
+            <button class="btn btn-primary"><svg><use href="#ic-plus"/></svg>Carica buste paga (PDF)</button>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat"><div class="l"><svg style="color:var(--success)"><use href="#ic-euro"/></svg>Totale netto · Luglio</div><div class="v num">€ 38.420</div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--brand)"><use href="#ic-doc"/></svg>Buste elaborate</div><div class="v num">24</div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--info)"><use href="#ic-send"/></svg>Inviate</div><div class="v num">21<small> / 24</small></div></div>
+            <div class="mini-stat"><div class="l"><svg style="color:var(--warning)"><use href="#ic-alert"/></svg>Da inviare</div><div class="v num">3</div></div>
+          </div>
+          <div class="toolbar">
+            <label class="field"><svg><use href="#ic-search"/></svg><input placeholder="Cerca dipendente…"></label>
+            <span class="select">Anno: 2026 <svg><use href="#ic-chevd"/></svg></span>
+            <span class="select">Mese: Luglio <svg><use href="#ic-chevd"/></svg></span>
+          </div>
+          <div class="card">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Dipendente</th><th>Periodo</th><th style="text-align:right">Netto</th><th>Stato invio</th><th style="text-align:right">Azioni</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="cell-name"><div class="avatar c1">ES</div><div><b>Elena Serra</b><small>Segreteria</small></div></div></td><td class="num">Luglio 2026</td><td class="num" style="text-align:right;font-weight:650">€ 1.840,00</td><td><span class="pill ok"><span class="dot"></span>Inviata</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-send"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c3">GF</div><div><b>Giulia Ferro</b><small>Docente</small></div></div></td><td class="num">Luglio 2026</td><td class="num" style="text-align:right;font-weight:650">€ 1.610,00</td><td><span class="pill ok"><span class="dot"></span>Inviata</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-send"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c4">SR</div><div><b>Sara Romano</b><small>Docente</small></div></div></td><td class="num">Luglio 2026</td><td class="num" style="text-align:right;font-weight:650">€ 1.720,00</td><td><span class="pill danger"><span class="dot"></span>Invio fallito</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-send"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c6">LC</div><div><b>Luca Conti</b><small>Docente</small></div></div></td><td class="num">Luglio 2026</td><td class="num" style="text-align:right;font-weight:650">€ 1.450,00</td><td><span class="pill warn"><span class="dot"></span>Da inviare</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-send"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c2">MB</div><div><b>Marco Bianchi</b><small>Docente</small></div></div></td><td class="num">Luglio 2026</td><td class="num" style="text-align:right;font-weight:650">€ 980,00</td><td><span class="pill ok"><span class="dot"></span>Inviata</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-dl"/></svg></button><button><svg class="i" style="width:16px;height:16px"><use href="#ic-send"/></svg></button></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tbl-foot"><span>1-5 di 24 buste paga</span><div class="pager"><button>‹</button><button class="on">1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>›</button></div></div>
+          </div>
+        </section>
+
+        <!-- ============ UTENTI & RUOLI (Direttore) ============ -->
+        <section class="screen" id="users">
+          <div class="page-head">
+            <div><h1 class="page-title">Utenti &amp; Ruoli <span class="pill violet" style="vertical-align:middle;font-size:11px"><svg class="i" style="width:13px;height:13px"><use href="#ic-lock"/></svg>Solo Direttore</span></h1><div class="page-desc">Gestisci gli account e i permessi di accesso</div></div>
+            <button class="btn btn-primary"><svg><use href="#ic-plus"/></svg>Nuovo utente</button>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Account attivi</h3><span class="pill neutral">4 utenti</span></div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Utente</th><th>Email</th><th>Ruolo</th><th>Ultimo accesso</th><th>Stato</th><th style="text-align:right">Azioni</th></tr></thead>
+                <tbody>
+                  <tr><td><div class="cell-name"><div class="avatar c1">PP</div><div><b>Paolo Pulvirenti</b><small>Tu</small></div></div></td><td>p.pulvirenti@scuola.it</td><td><span class="pill violet"><span class="dot"></span>Direttore</span></td><td class="num">Adesso</td><td><span class="pill ok"><span class="dot"></span>Attivo</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c5">AM</div><div><b>Anna Moretti</b><small>Amministrazione</small></div></div></td><td>a.moretti@scuola.it</td><td><span class="pill violet"><span class="dot"></span>Direttore</span></td><td class="num">Ieri, 17:20</td><td><span class="pill ok"><span class="dot"></span>Attivo</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c3">GS</div><div><b>Giorgia Sensi</b><small>Segreteria</small></div></div></td><td>g.sensi@scuola.it</td><td><span class="pill info"><span class="dot"></span>Segreteria</span></td><td class="num">Oggi, 09:05</td><td><span class="pill ok"><span class="dot"></span>Attivo</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                  <tr><td><div class="cell-name"><div class="avatar c4">DR</div><div><b>Davide Riva</b><small>Segreteria</small></div></div></td><td>d.riva@scuola.it</td><td><span class="pill info"><span class="dot"></span>Segreteria</span></td><td class="num">3 giorni fa</td><td><span class="pill neutral"><span class="dot"></span>Sospeso</span></td><td><div class="row-actions" style="justify-content:flex-end"><button><svg class="i" style="width:16px;height:16px"><use href="#ic-edit"/></svg></button><button class="del"><svg class="i" style="width:16px;height:16px"><use href="#ic-trash"/></svg></button></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>Permessi per ruolo</h3><span class="link">Modifica</span></div>
+            <div class="tbl-wrap">
+              <table class="perm">
+                <thead><tr><th>Area / Funzione</th><th><span class="pill violet" style="font-size:11px"><span class="dot"></span>Direttore</span></th><th><span class="pill info" style="font-size:11px"><span class="dot"></span>Segreteria</span></th></tr></thead>
+                <tbody>
+                  <tr><td>Dashboard</td><td><svg class="i yes"><use href="#ic-check"/></svg></td><td><svg class="i yes"><use href="#ic-check"/></svg></td></tr>
+                  <tr><td>Anagrafiche dipendenti</td><td><svg class="i yes"><use href="#ic-check"/></svg></td><td><svg class="i yes"><use href="#ic-check"/></svg></td></tr>
+                  <tr><td>Documenti · caricamento</td><td><svg class="i yes"><use href="#ic-check"/></svg></td><td><svg class="i yes"><use href="#ic-check"/></svg></td></tr>
+                  <tr><td>Presenze / Contratti</td><td><svg class="i yes"><use href="#ic-check"/></svg></td><td><svg class="i yes"><use href="#ic-check"/></svg></td></tr>
+                  <tr><td>Invio email</td><td><svg class="i yes"><use href="#ic-check"/></svg></td><td><svg class="i yes"><use href="#ic-check"/></svg></td></tr>
+                  <tr><td><b>Buste paga e stipendi</b></td><td><svg class="i yes"><use href="#ic-check"/></svg></td><td><svg class="i no"><use href="#ic-x"/></svg></td></tr>
+                  <tr><td><b>Gestione account / utenti</b></td><td><svg class="i yes"><use href="#ic-check"/></svg></td><td><svg class="i no"><use href="#ic-x"/></svg></td></tr>
+                  <tr><td><b>Eliminazione dipendenti / documenti</b></td><td><svg class="i yes"><use href="#ic-check"/></svg></td><td><svg class="i no"><use href="#ic-x"/></svg></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var wrap=document.currentScript.closest('body')||document;
+    function q(s,r){return (r||document).querySelector(s)}
+    function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+    var labels={dash:'Dashboard',emp:'Dipendenti',doc:'Documenti',contr:'Contratti',pres:'Presenze',mailp:'Email',pay:'Buste Paga',users:'Utenti & Ruoli'};
+    function go(id){
+      qa('.screen').forEach(function(s){s.classList.toggle('on',s.id===id)});
+      qa('.nav-item[data-go]').forEach(function(n){n.classList.toggle('on',n.getAttribute('data-go')===id)});
+      var c=q('#crumb'); if(c) c.textContent=labels[id]||'';
+      var main=q('.content'); if(main) main.scrollIntoView({block:'start'});
+    }
+    qa('.nav-item[data-go]').forEach(function(n){n.addEventListener('click',function(){go(n.getAttribute('data-go'))})});
+
+    // theme toggle (integra col toggle dell'host: stampa data-theme sul root)
+    var btn=q('#themeBtn');
+    function current(){
+      var t=document.documentElement.getAttribute('data-theme');
+      if(t) return t;
+      return window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    }
+    function paint(){
+      var use=q('#themeUse'); if(use) use.setAttribute('href', current()==='dark'?'#ic-sun':'#ic-moon');
+    }
+    if(btn){btn.addEventListener('click',function(){
+      var next=current()==='dark'?'light':'dark';
+      document.documentElement.setAttribute('data-theme',next); paint();
+    });}
+    paint();
+  })();
+</script>
+</body>
+</html>
