@@ -3,397 +3,733 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Presidium — il gestionale del personale per le scuole: anagrafiche, contratti, buste paga, documenti di sicurezza e presenze.">
-<title>Presidium — Il gestionale del personale per la tua scuola</title>
+<title>Presidium — Personale e buste paga per le scuole</title>
+<meta name="description" content="Presidium è il programma per le segreterie delle scuole: dipendenti, contratti, buste paga e presenze in un unico posto. Le buste paga del consulente si dividono e partono da sole. I dati restano a scuola.">
+<meta name="theme-color" content="#141b2b">
+<link rel="canonical" href="https://presidium-app.com/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:url" content="https://presidium-app.com/">
+<meta property="og:title" content="Presidium — Personale e buste paga per le scuole">
+<meta property="og:description" content="Dipendenti, contratti, buste paga e presenze in un unico programma. Ogni mattina l'elenco di cosa fare.">
+<meta property="og:image" content="https://presidium-app.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2325408f'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='700' fill='white' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  @font-face{font-family:"Figtree";font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/figtree-latin.woff2) format("woff2")}
+
   :root{
-    --ink:#0C1A1C; --text:#14231F; --muted:#586762; --subtle:#8A9A94;
-    --bg:#FFFFFF; --bg-2:#F3F7F6; --bg-3:#EAF1F0; --line:#E3EBE9; --line-strong:#D3DEDB;
-    --brand:#0E7C7B; --brand-2:#14B8A6; --brand-ink:#06413F; --brand-soft:#E2F2F0;
-    --amber:#C77A17; --amber-soft:#FBF0DC;
-    --r:14px; --r-sm:10px; --r-lg:22px;
-    --ff:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
-    --shadow:0 1px 3px rgba(12,26,28,.06),0 1px 2px rgba(12,26,28,.04);
-    --shadow-md:0 18px 40px -14px rgba(12,26,28,.18),0 4px 10px rgba(12,26,28,.05);
-    --shadow-lg:0 40px 80px -24px rgba(6,50,48,.45);
+    --ink:#141b2b; --ink-2:#1d2638; --ink-line:#2c3750;
+    --text:#1f2937; --muted:#4a5568; --subtle:#6b7588;
+    --bg:#ffffff; --bg-2:#f5f6f8; --bg-3:#eef1f6; --line:#e3e6ec; --line-2:#d5dae3;
+    --brand:#25408f; --brand-2:#3654b3; --brand-dark:#1a2f6c; --brand-soft:#e8edf9; --brand-light:#9db2f2;
+    --amber:#985400; --amber-soft:#fdf1df; --red:#b3283a; --green:#15803d; --green-soft:#e6f4ea;
+    --r:14px; --r-lg:20px;
+    --ff:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --shadow-sm:0 1px 2px rgba(20,27,43,.06);
+    --shadow:0 1px 3px rgba(20,27,43,.06),0 8px 24px -12px rgba(20,27,43,.12);
+    --shadow-lg:0 30px 60px -20px rgba(20,27,43,.35),0 12px 24px -12px rgba(20,27,43,.2);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
-  body.ps{font-family:var(--ff);color:var(--text);background:var(--bg);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  .ps svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
-  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
-  a{color:inherit;text-decoration:none}
-  .num{font-variant-numeric:tabular-nums}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--brand)}
-  .eyebrow .badge{background:var(--brand-soft);color:var(--brand-ink);padding:3px 9px;border-radius:20px;letter-spacing:.6px}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:var(--ff);color:var(--text);background:var(--bg);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--brand-light);outline-offset:2px;border-radius:6px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
-  /* NAV */
-  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;gap:24px;height:66px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.4px;color:var(--ink)}
-  .logo-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(140deg,var(--brand-2),var(--brand));box-shadow:0 4px 12px rgba(14,124,123,.32)}
-  .logo-mark svg{width:20px;height:20px;stroke:#fff;stroke-width:2}
-  .nav-links{display:flex;gap:26px;margin-left:14px}
-  .nav-links a{font-size:14.5px;font-weight:550;color:var(--muted)}
-  .nav-links a:hover{color:var(--text)}
-  .nav-cta{margin-left:auto;display:flex;align-items:center;gap:10px}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:inherit;font-weight:650;
-    font-size:15px;padding:12px 22px;border-radius:11px;border:1px solid transparent;cursor:pointer;transition:.16s;white-space:nowrap}
-  .btn svg{width:18px;height:18px}
-  .btn-primary{background:linear-gradient(135deg,var(--brand),#0c6a69);color:#fff;box-shadow:0 6px 18px -6px rgba(14,124,123,.5)}
-  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 24px -8px rgba(14,124,123,.6)}
-  .btn-ghost{background:var(--bg);color:var(--text);border-color:var(--line-strong)}
-  .btn-ghost:hover{background:var(--bg-2);border-color:var(--muted)}
-  .btn-light{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.28)}
-  .btn-light:hover{background:rgba(255,255,255,.2)}
-  .btn-white{background:#fff;color:var(--brand-ink)}
-  .btn-white:hover{transform:translateY(-1px)}
-  .btn-sm{padding:9px 16px;font-size:14px}
+  /* type */
+  .kicker{font-size:14px;font-weight:700;letter-spacing:.4px;color:var(--brand)}
+  h1,h2,h3{color:var(--ink);letter-spacing:-.02em;text-wrap:balance}
+  h2{font-size:clamp(30px,3.6vw,44px);line-height:1.1;font-weight:800}
+  h3{font-size:20px;line-height:1.25;font-weight:700}
+  .lead{font-size:19px;color:var(--muted);line-height:1.6}
 
-  /* HERO */
-  .hero{position:relative;background:radial-gradient(1100px 600px at 78% -10%,#12514F 0%,transparent 55%),linear-gradient(160deg,#0C2321 0%,#0A1B1D 60%,#0C1A1C 100%);color:#EAF4F2;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(700px 400px at 75% 10%,#000,transparent 75%);opacity:.6}
-  .hero-in{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center;padding:78px 0 90px}
-  .hero h1{font-size:clamp(34px,4.4vw,54px);line-height:1.05;letter-spacing:-1.4px;font-weight:820;color:#fff;text-wrap:balance;margin:20px 0 0}
-  .hero h1 .hl{background:linear-gradient(120deg,#2DD4BF,#5EEAD4);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.sub{margin-top:20px;font-size:18.5px;line-height:1.6;color:#B9CFC9;max-width:520px}
-  .hero-cta{display:flex;gap:13px;margin-top:32px;flex-wrap:wrap}
-  .hero-meta{display:flex;gap:22px;margin-top:30px;flex-wrap:wrap}
-  .hero-meta div{display:flex;align-items:center;gap:9px;font-size:14px;color:#9FBAB3}
-  .hero-meta svg{width:18px;height:18px;color:#2DD4BF}
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-size:16px;font-weight:650;padding:13px 22px;border-radius:12px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s,transform .15s,box-shadow .15s;white-space:nowrap}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 20px -10px rgba(37,64,143,.7)}
+  .btn-primary:hover{background:var(--brand-dark)}
+  .btn-white{background:#fff;color:var(--brand-dark)}
+  .btn-white:hover{background:var(--brand-soft)}
+  .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+  .btn-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5)}
+  .btn-sm{padding:9px 16px;font-size:15px;border-radius:10px}
 
-  /* hero app-preview */
-  .glass{position:relative}
-  .win{background:#0E1F20;border:1px solid rgba(255,255,255,.09);border-radius:16px;box-shadow:var(--shadow-lg);overflow:hidden;transform:perspective(1400px) rotateY(-9deg) rotateX(3deg)}
-  .win-bar{display:flex;align-items:center;gap:7px;padding:12px 14px;background:#0A1717;border-bottom:1px solid rgba(255,255,255,.07)}
-  .win-bar i{width:10px;height:10px;border-radius:50%;background:#2a3a3a}
-  .win-bar .url{margin-left:12px;font-size:11.5px;color:#5f7873;font-family:var(--mono)}
-  .win-body{padding:16px;background:linear-gradient(180deg,#0E1F20,#0B1919);display:flex;flex-direction:column;gap:12px}
-  .pv-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .pv-tile{background:#122626;border:1px solid rgba(255,255,255,.06);border-radius:11px;padding:12px}
-  .pv-tile .l{font-size:10.5px;color:#7c968f;font-weight:600}
-  .pv-tile .v{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-top:6px}
-  .pv-tile .v small{font-size:12px;color:#5EEAD4;font-weight:700}
-  .pv-chart{background:#122626;border:1px solid rgba(255,255,255,.06);border-radius:11px;padding:14px}
-  .pv-chart .h{font-size:11px;color:#8aa49d;font-weight:650;margin-bottom:12px}
-  .pv-bars{display:flex;align-items:flex-end;gap:10px;height:78px}
-  .pv-bars span{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#2DD4BF,#0E7C7B)}
-  .pv-float{position:absolute;background:#fff;color:var(--text);border-radius:12px;box-shadow:var(--shadow-md);padding:11px 14px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600}
-  .pv-float .d{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none}
-  .pv-float.a{right:-18px;top:26px}
-  .pv-float.b{left:-24px;bottom:34px}
-  .pv-float small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+  /* nav */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:saturate(160%) blur(12px);-webkit-backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;gap:28px;height:68px}
+  .logo{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+  .logo-mark{width:36px;height:36px;border-radius:10px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px}
+  .logo b{display:block;font-size:18px;font-weight:800;letter-spacing:-.3px;line-height:1.1}
+  .logo small{display:block;font-size:12.5px;color:var(--subtle);line-height:1.2}
+  .nav-links{display:flex;gap:26px;margin-left:12px}
+  .nav-links a{font-size:15px;font-weight:550;color:var(--muted);text-decoration:none}
+  .nav-links a:hover{color:var(--ink)}
+  .nav .btn{margin-left:auto}
 
-  /* logos / trust strip */
-  .strip{border-bottom:1px solid var(--line);background:var(--bg-2)}
-  .strip-in{display:flex;align-items:center;justify-content:center;gap:14px;padding:20px 0;flex-wrap:wrap;color:var(--muted);font-size:14.5px;text-align:center}
-  .strip-in b{color:var(--text);font-weight:700}
+  /* hero */
+  .hero{background:var(--ink);color:#e7ebf4;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 500px at 85% -10%,rgba(54,84,179,.55),transparent 60%),radial-gradient(600px 400px at -10% 110%,rgba(37,64,143,.35),transparent 60%)}
+  .hero-in{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:center;padding-top:84px;padding-bottom:96px}
+  .hero .kicker{color:var(--brand-light)}
+  .hero h1{color:#f6f8fd;font-size:clamp(38px,4.8vw,60px);line-height:1.04;font-weight:800;letter-spacing:-.03em;margin-top:18px}
+  .hero .lead{color:#c3cbdd;margin-top:22px;max-width:540px}
+  .hero-cta{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:34px;list-style:none}
+  .hero-facts li{display:flex;align-items:center;gap:9px;font-size:15px;color:#b8c1d6}
+  .hero-facts svg{color:var(--brand-light);width:18px;height:18px}
 
-  /* SECTION */
-  section.blk{padding:88px 0}
-  .sec-head{max-width:680px;margin:0 auto 52px;text-align:center}
-  .sec-head h2{font-size:clamp(27px,3.4vw,38px);line-height:1.12;letter-spacing:-1px;font-weight:800;margin-top:14px;text-wrap:balance}
-  .sec-head p{margin-top:15px;font-size:17.5px;color:var(--muted)}
+  .shot{position:relative}
+  .frame{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.08)}
+  .frame-bar{display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;background:#eceff4;border-bottom:1px solid var(--line)}
+  .frame-bar i{width:10px;height:10px;border-radius:50%;background:#cfd5df}
+  .frame-bar span{margin-left:auto;margin-right:auto;font-size:12px;color:var(--subtle);font-weight:600;transform:translateX(-18px)}
+  .frame img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top left}
+  .hero .shot{transform:perspective(1600px) rotateY(-6deg) rotateX(2deg);transform-origin:left center}
+  .chip{position:absolute;display:flex;align-items:center;gap:11px;background:#fff;color:var(--ink);border-radius:12px;padding:11px 14px;box-shadow:0 18px 36px -14px rgba(0,0,0,.45);font-size:14px;font-weight:650;line-height:1.25}
+  .chip small{display:block;font-weight:500;color:var(--subtle);font-size:12.5px}
+  .chip .dot{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+  .chip.c1{left:-26px;bottom:42px}
+  .chip.c2{right:18px;top:-20px}
 
-  /* FEATURES */
-  .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .fcard{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:.18s;position:relative}
-  .fcard:hover{border-color:var(--brand);box-shadow:var(--shadow-md);transform:translateY(-3px)}
-  .fico{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand);margin-bottom:18px}
-  .fico svg{width:25px;height:25px}
-  .fcard h3{font-size:18.5px;font-weight:730;letter-spacing:-.3px}
-  .fcard p{margin-top:9px;color:var(--muted);font-size:15px;line-height:1.6}
+  /* sections */
+  section{scroll-margin-top:72px}
+  .blk{padding:104px 0}
+  .blk.alt{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .head{max-width:720px;margin-bottom:56px}
+  .head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .head h2{margin-top:12px}
+  .head .lead{margin-top:16px}
 
-  /* BENEFITS band */
-  .band{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .bene{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-  .bene .b{display:flex;flex-direction:column;gap:10px}
-  .bene .bi{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);color:var(--brand)}
-  .bene .bi svg{width:22px;height:22px}
-  .bene h3{font-size:18px;font-weight:720;letter-spacing:-.3px}
-  .bene p{color:var(--muted);font-size:15px}
+  /* problems */
+  .probs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .prob{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;box-shadow:var(--shadow-sm)}
+  .prob .tag{font-size:14px;font-weight:700}
+  .prob h3{margin-top:10px}
+  .prob p{margin-top:8px;color:var(--muted);font-size:16px}
 
-  /* STEPS */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:s}
-  .step{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;position:relative}
-  .step::before{counter-increment:s;content:"0" counter(s);font-size:15px;font-weight:800;color:var(--brand);font-family:var(--mono);letter-spacing:1px}
-  .step h3{margin-top:12px;font-size:19px;font-weight:730;letter-spacing:-.3px}
-  .step p{margin-top:8px;color:var(--muted);font-size:15px}
+  /* features */
+  .feature{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:center}
+  .feature + .feature{margin-top:112px}
+  .feature.flip .f-text{order:2}
+  .f-text h2{font-size:clamp(28px,3vw,38px);margin-top:12px}
+  .f-text > p{margin-top:16px;color:var(--muted);font-size:18px}
+  .ticks{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:14px}
+  .ticks li{display:flex;gap:12px;align-items:flex-start;font-size:16.5px;color:var(--text)}
+  .ticks li svg{width:22px;height:22px;color:var(--brand);background:var(--brand-soft);border-radius:50%;padding:4px;margin-top:1px;stroke-width:2.4}
+  .zoom{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;text-align:left;border-radius:14px}
+  .zoom .frame{box-shadow:var(--shadow);border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+  .zoom:hover .frame{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .zoom-hint{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:13.5px;color:var(--subtle)}
+  .zoom-hint svg{width:16px;height:16px}
 
-  /* DEMO band */
-  .demo{background:radial-gradient(800px 400px at 20% 0%,#12514F,transparent 60%),linear-gradient(150deg,#0C2321,#0A1B1D);color:#fff;border-radius:var(--r-lg);padding:56px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;box-shadow:var(--shadow-lg)}
-  .demo h2{font-size:clamp(24px,3vw,33px);letter-spacing:-.8px;font-weight:800;text-wrap:balance;max-width:560px}
-  .demo p{margin-top:12px;color:#AEC8C2;font-size:16.5px;max-width:520px}
+  /* small cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow-sm)}
+  .card .ico{width:44px;height:44px;border-radius:12px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;margin-bottom:18px}
+  .card .ico svg{width:22px;height:22px}
+  .card p{margin-top:8px;color:var(--muted);font-size:16px}
 
-  /* CONTACT */
-  #contatti{scroll-margin-top:80px}
-  .contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:start}
-  .contact-left h2{font-size:clamp(26px,3.2vw,36px);letter-spacing:-.9px;font-weight:820;line-height:1.1;text-wrap:balance}
-  .contact-left p{margin-top:16px;color:var(--muted);font-size:16.5px}
-  .clist{margin-top:26px;display:flex;flex-direction:column;gap:16px}
-  .clist .ci{display:flex;gap:13px;align-items:flex-start}
-  .clist .ci .k{width:38px;height:38px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none}
-  .clist .ci .k svg{width:19px;height:19px}
-  .clist .ci b{font-weight:680;font-size:15.5px}
-  .clist .ci span{display:block;color:var(--muted);font-size:14px}
-  .form-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;box-shadow:var(--shadow-md)}
+  /* archive timeline */
+  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:8px}
+  .tl{border-top:5px solid var(--brand);padding-top:24px}
+  .tl:nth-child(2){border-color:#5f78c0}
+  .tl:nth-child(3){border-color:#9aabd8}
+  .tl .yrs{font-size:34px;font-weight:800;color:var(--brand);letter-spacing:-.02em;line-height:1.1}
+  .tl h3{margin-top:8px}
+  .tl p{margin-top:6px;color:var(--muted);font-size:16px}
+  .note{margin-top:36px;font-size:17px;color:var(--text);background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 20px}
+
+  /* dark section */
+  .dark{background:var(--ink);color:#d5dbe8}
+  .dark h2{color:#f6f8fd}
+  .dark .kicker{color:var(--brand-light)}
+  .dark .lead{color:#b8c1d6}
+  .dcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .dcard{background:var(--ink-2);border:1px solid var(--ink-line);border-radius:16px;padding:26px 28px}
+  .dcard svg{color:var(--brand-light);width:24px;height:24px}
+  .dcard h3{color:#f3f5fa;margin-top:14px;font-size:19px}
+  .dcard p{color:#b8c1d6;margin-top:6px;font-size:15.5px}
+  .privacy{margin-top:32px;border-left:4px solid var(--brand-light);padding:6px 0 6px 22px;color:#d5dbe8;font-size:16.5px;max-width:900px}
+
+  /* reference */
+  .ref{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;background:var(--brand-soft);border:1px solid #d3dcf3;border-radius:var(--r-lg);padding:40px 44px}
+  .ref .badge{width:76px;height:76px;border-radius:18px;background:var(--brand);color:#fff;display:grid;place-items:center}
+  .ref .badge svg{width:38px;height:38px}
+  .ref p.k{font-size:14px;font-weight:700;color:var(--brand)}
+  .ref h3{font-size:clamp(24px,2.6vw,32px);margin-top:4px;font-weight:800}
+  .ref p.d{margin-top:8px;color:var(--muted);font-size:17px}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;list-style:none;counter-reset:s}
+  .step{border-top:5px solid var(--brand);padding-top:22px;counter-increment:s}
+  .step::before{content:counter(s);display:block;font-size:44px;font-weight:800;color:var(--brand);line-height:1}
+  .step h3{margin-top:12px}
+  .step p{margin-top:6px;color:var(--muted);font-size:16px}
+  .steps-note{margin-top:40px;font-size:17px;color:var(--text)}
+
+  /* pricing */
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .tier{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 26px;display:flex;flex-direction:column;box-shadow:var(--shadow-sm)}
+  .tier .who{font-size:15px;font-weight:700;color:var(--brand)}
+  .tier .price{margin-top:14px;display:flex;align-items:baseline;gap:6px;color:var(--ink)}
+  .tier .price b{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .tier .price span{color:var(--subtle);font-size:15px}
+  .tier .year{margin-top:8px;font-size:15px;color:var(--muted)}
+  .tier .year b{color:var(--ink)}
+  .included{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;margin-top:20px}
+  .box{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 30px;box-shadow:var(--shadow-sm)}
+  .box h3{font-size:18px}
+  .box .ticks{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}
+  .box .ticks li{font-size:15.5px}
+  .box p{margin-top:8px;color:var(--muted);font-size:16px}
+  .box .big{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+  .price-note{margin-top:22px;font-size:15px;color:var(--subtle)}
+
+  /* faq */
+  .faq{max-width:840px;margin:0 auto;border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px 4px;font-size:18px;font-weight:650;color:var(--ink)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary svg{transition:transform .2s;color:var(--brand)}
+  .faq details[open] summary svg{transform:rotate(45deg)}
+  .faq details p{padding:0 4px 24px;color:var(--muted);font-size:16.5px;max-width:740px}
+
+  /* contact */
+  .contact{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
+  .contact .lead{margin-top:16px}
+  .clist{list-style:none;margin-top:30px;display:flex;flex-direction:column;gap:18px}
+  .clist li{display:flex;gap:14px;align-items:flex-start}
+  .clist .k{width:40px;height:40px;border-radius:11px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none}
+  .clist b{display:block;font-size:16px;color:var(--ink)}
+  .clist span{display:block;color:var(--muted);font-size:15px}
+  .clist a{color:var(--brand);font-weight:650;text-decoration:none}
+  .clist a:hover{text-decoration:underline}
+  .form-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:32px;box-shadow:var(--shadow)}
   .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .fg{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
-  .fg label{font-size:13.5px;font-weight:650;color:var(--text)}
+  .fg label{font-size:14px;font-weight:650;color:var(--ink)}
   .fg label .req{color:var(--brand)}
-  .fg input,.fg textarea{font-family:inherit;font-size:15px;color:var(--text);background:var(--bg-2);border:1px solid var(--line-strong);
-    border-radius:11px;padding:12px 14px;outline:none;width:100%;transition:.15s}
-  .fg input:focus,.fg textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft);background:#fff}
-  .fg textarea{resize:vertical;min-height:110px;line-height:1.55}
-  .hp{position:absolute;left:-9999px}
-  .form-note{font-size:12.5px;color:var(--subtle);margin-top:4px;text-align:center}
-  .form-msg{display:none;text-align:center;padding:30px 10px}
-  .form-msg .ok{width:64px;height:64px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;margin:0 auto 18px}
-  .form-msg .ok svg{width:32px;height:32px;stroke-width:2.2}
-  .form-msg h3{font-size:22px;font-weight:780;letter-spacing:-.4px}
-  .form-msg p{color:var(--muted);margin-top:8px}
-  .form-err{display:none;margin-top:12px;font-size:13.5px;color:#B4341F;background:#FBEAE7;border:1px solid #F3C9C1;padding:10px 13px;border-radius:10px}
+  .fg input,.fg textarea{font:inherit;font-size:16px;color:var(--text);background:var(--bg-2);border:1px solid var(--line-2);border-radius:11px;padding:12px 14px;width:100%;transition:border-color .15s,box-shadow .15s,background .15s}
+  .fg input:focus,.fg textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px var(--brand-soft);background:#fff}
+  .fg textarea{resize:vertical;min-height:110px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .form-note{font-size:13.5px;color:var(--subtle);margin-top:12px;text-align:center}
+  .form-err{display:none;margin-top:12px;font-size:14.5px;color:var(--red);background:#fbeaec;border:1px solid #f1c6cc;padding:11px 14px;border-radius:10px}
+  .form-ok{display:none;text-align:center;padding:36px 10px}
+  .form-ok .okc{width:64px;height:64px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:0 auto 18px}
+  .form-ok .okc svg{width:30px;height:30px;stroke-width:2.4}
+  .form-ok h3{font-size:22px}
+  .form-ok p{color:var(--muted);margin-top:8px}
 
-  /* FOOTER */
-  footer.ft{background:var(--ink);color:#9FBAB3;padding:44px 0}
-  .ft-in{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  /* footer */
+  .ft{background:var(--ink);color:#9aa4ba;padding:48px 0;font-size:15px}
+  .ft-in{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
   .ft .logo{color:#fff}
-  .ft small{font-size:13px;color:#6d8580}
-  .ft-links{display:flex;gap:22px;font-size:14px}
+  .ft .logo small{color:#8b96ad}
+  .ft-links{display:flex;gap:22px;flex-wrap:wrap}
+  .ft-links a{text-decoration:none}
   .ft-links a:hover{color:#fff}
+  .ft-bottom{margin-top:28px;padding-top:24px;border-top:1px solid var(--ink-line);font-size:14px;color:#7c879d}
 
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
+  /* lightbox */
+  dialog.lb{border:0;padding:0;background:transparent;max-width:min(1400px,94vw);max-height:92vh;margin:auto}
+  dialog.lb::backdrop{background:rgba(10,14,24,.82)}
+  dialog.lb img{width:100%;height:auto;max-height:86vh;object-fit:contain;border-radius:12px;background:#fff}
+  dialog.lb p{color:#e7ebf4;text-align:center;margin-top:12px;font-size:15px}
+  dialog.lb button{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(20,27,43,.75);color:#fff;cursor:pointer;display:grid;place-items:center}
 
-  @media (max-width:920px){
-    .hero-in{grid-template-columns:1fr;gap:44px;padding:56px 0 64px}
-    .glass{max-width:460px;margin:0 auto}
-    .feat,.bene,.steps{grid-template-columns:1fr}
-    .contact{grid-template-columns:1fr;gap:30px}
-    .nav-links{display:none}
-    .demo{padding:38px}
-    section.blk{padding:64px 0}
+  /* reveal */
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+  .no-js .rv{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none!important;animation:none!important}
+    .rv{opacity:1;transform:none}
+    .hero .shot{transform:none}
   }
-  @media (max-width:560px){.frow{grid-template-columns:1fr}.hero-cta{flex-direction:column;align-items:stretch}.hero-cta .btn{width:100%}}
+  @media (max-width:1000px){
+    .hero-in{grid-template-columns:1fr;padding-top:64px;padding-bottom:72px;gap:48px}
+    .hero .shot{transform:none;max-width:680px}
+    .feature,.feature.flip{grid-template-columns:1fr;gap:32px}
+    .feature.flip .f-text{order:0}
+    .feature + .feature{margin-top:80px}
+    .probs,.cards,.dcards,.timeline{grid-template-columns:1fr 1fr}
+    .steps,.tiers{grid-template-columns:1fr 1fr}
+    .included{grid-template-columns:1fr}
+    .contact{grid-template-columns:1fr;gap:36px}
+    .nav-links{display:none}
+    .blk{padding:80px 0}
+  }
+  @media (max-width:640px){
+    body{font-size:16px}
+    .wrap{padding-left:16px;padding-right:16px}
+    .probs,.cards,.dcards,.timeline,.steps,.tiers,.frow{grid-template-columns:1fr}
+    .box .ticks{grid-template-columns:1fr}
+    .hero-cta .btn{width:100%}
+    .chip{display:none}
+    .ref{grid-template-columns:1fr;padding:30px 24px;gap:20px}
+    .logo small{display:none}
+    .nav .btn{padding:9px 13px;font-size:14px}
+    .blk{padding:64px 0}
+    .head{margin-bottom:40px}
+    .form-card{padding:22px}
+  }
 </style>
 </head>
-<body class="ps">
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="s-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></symbol>
-  <symbol id="s-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-  <symbol id="s-contract" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></symbol>
-  <symbol id="s-euro" viewBox="0 0 24 24"><path d="M17 6.5A6 6 0 0 0 7 11m10 6.5A6 6 0 0 1 7 13"/><path d="M4 10h9M4 14h8"/></symbol>
-  <symbol id="s-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></symbol>
-  <symbol id="s-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
-  <symbol id="s-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
-  <symbol id="s-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-  <symbol id="s-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="s-play" viewBox="0 0 24 24"><path d="M6 4v16l14-8z"/></symbol>
-  <symbol id="s-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
-  <symbol id="s-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-  <symbol id="s-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
-  <symbol id="s-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></symbol>
-  <symbol id="s-heart" viewBox="0 0 24 24"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-6.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
-  <symbol id="s-cloud" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 0 0 .5-9 6 6 0 0 0-11.6-1.5A4 4 0 0 0 6.5 19z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-pc" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 0 0 .5-9 6 6 0 0 0-11.6-1.5A4 4 0 0 0 6.5 19z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5M3 21v-5h5"/></symbol>
+  <symbol id="i-net" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M12 8v4M5 16v-2h14v2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="1"/><circle cx="17.5" cy="10.5" r="1"/><circle cx="8.5" cy="7.5" r="1"/><circle cx="6.5" cy="12.5" r="1"/><path d="M12 2a10 10 0 0 0 0 20c.9 0 1.7-.8 1.7-1.7 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7H17a5 5 0 0 0 5-5C22 6 17.5 2 12 2z"/></symbol>
+  <symbol id="i-import" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-school" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
 </defs></svg>
 
-  <!-- NAV -->
-  <div class="nav"><div class="wrap nav-in">
-    <a class="logo" href="#top"><span class="logo-mark"><svg viewBox="0 0 24 24"><use href="#s-cap"/></svg></span>Presidium</a>
-    <nav class="nav-links">
-      <a href="#funzioni">Funzionalità</a><a href="#come">Come funziona</a><a href="#demo">Demo</a><a href="#contatti">Contatti</a>
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top" aria-label="Presidium, torna su">
+      <span class="logo-mark" aria-hidden="true">P</span>
+      <span><b>Presidium</b><small>Personale e buste paga</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Sezioni">
+      <a href="#funzioni">Cosa fa</a>
+      <a href="#sicurezza">Dati e sicurezza</a>
+      <a href="#partenza">Come si parte</a>
+      <a href="#prezzi">Prezzi</a>
+      <a href="#domande">Domande</a>
     </nav>
-    <div class="nav-cta"><a class="btn btn-primary btn-sm" href="#contatti">Richiedi una demo</a></div>
-  </div></div>
+    <a class="btn btn-primary btn-sm" href="#contatti">Richiedi una dimostrazione</a>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <header class="hero" id="top"><div class="wrap hero-in">
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-in">
     <div>
-      <span class="eyebrow"><svg class="i" style="width:16px;height:16px"><use href="#s-sparkle"/></svg>Gestionale per scuole <span class="badge">Early access</span></span>
-      <h1>Tutto il personale della tua scuola, <span class="hl">in un unico posto.</span></h1>
-      <p class="sub">Anagrafiche, contratti, buste paga, documenti di sicurezza e presenze. Semplice, sicuro e sempre aggiornato — pensato per segreterie ed enti di formazione.</p>
+      <p class="kicker">Per le segreterie delle scuole</p>
+      <h1 id="hero-title">Il personale della scuola, in ordine. Ogni mattina sapete cosa fare.</h1>
+      <p class="lead">Dipendenti, contratti, buste paga e presenze in un unico programma, con il nome della vostra scuola. Il PDF del consulente si divide da solo e ogni dipendente riceve la sua busta paga per email.</p>
       <div class="hero-cta">
-        <a class="btn btn-white" href="#contatti">Richiedi una demo <svg class="i"><use href="#s-arrow"/></svg></a>
-        <a class="btn btn-light" href="#demo"><svg class="i"><use href="#s-play"/></svg>Guarda la demo</a>
+        <a class="btn btn-white" href="#contatti">Richiedi una dimostrazione <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-outline" href="#funzioni">Guarda cosa fa</a>
       </div>
-      <div class="hero-meta">
-        <div><svg><use href="#s-check"/></svg>Nessuna installazione</div>
-        <div><svg><use href="#s-check"/></svg>Accesso con ruoli</div>
-        <div><svg><use href="#s-check"/></svg>Dati al sicuro</div>
+      <ul class="hero-facts">
+        <li><svg class="i"><use href="#i-check"/></svg>In uso ogni giorno in una scuola</li>
+        <li><svg class="i"><use href="#i-check"/></svg>I dati restano a scuola</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Assistenza compresa</li>
+      </ul>
+    </div>
+    <div class="shot">
+      <div class="frame">
+        <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>Presidium</span></div>
+        <img src="img/home.webp" width="1600" height="1000" alt="La Home di Presidium: dipendenti in forza, contratti in scadenza, buste paga del mese e l'elenco delle cose da fare" fetchpriority="high">
+      </div>
+      <div class="chip c1" aria-hidden="true"><span class="dot" style="background:var(--amber-soft);color:var(--amber)"><svg class="i"><use href="#i-clock"/></svg></span><span>Contratto in scadenza<small>tra 15 giorni · Apri scheda</small></span></div>
+      <div class="chip c2" aria-hidden="true"><span class="dot" style="background:var(--brand-soft);color:var(--brand)"><svg class="i"><use href="#i-mail"/></svg></span><span>4 buste paga da inviare<small>18 su 22 già inviate</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="blk alt" aria-labelledby="prob-title">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="kicker">Il problema</p>
+      <h2 id="prob-title">Oggi, in molte segreterie, il tempo se ne va in lavoro ripetitivo</h2>
+    </div>
+    <div class="probs">
+      <div class="prob rv"><p class="tag" style="color:var(--red)">Un file solo</p><h3>Le buste paga arrivano tutte insieme</h3><p>Il PDF del consulente va diviso a mano e mandato persona per persona.</p></div>
+      <div class="prob rv"><p class="tag" style="color:var(--amber)">Nessun avviso</p><h3>I contratti scadono in silenzio</h3><p>Ci si accorge della scadenza quando è già passata.</p></div>
+      <div class="prob rv"><p class="tag" style="color:var(--brand)">Tutto sparso</p><h3>Le informazioni sono ovunque</h3><p>Fogli Excel, cartelle, caselle di posta, fogli presenze, raccoglitori.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNZIONI -->
+<section class="blk" id="funzioni" aria-labelledby="f-title">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="kicker">Cosa fa Presidium</p>
+      <h2 id="f-title">Un programma solo, pensato per chi ha poco tempo</h2>
+      <p class="lead">Ecco le schermate vere del programma. I dati sono di una scuola di esempio.</p>
+    </div>
+
+    <div class="feature">
+      <div class="f-text rv">
+        <p class="kicker">La Home</p>
+        <h2>Aprite Presidium e sapete cosa fare</h2>
+        <p>Le cose che chiedono attenzione sono in un elenco, in ordine di urgenza. Ogni voce porta dritti al punto giusto.</p>
+        <ul class="ticks">
+          <li><svg class="i"><use href="#i-check"/></svg>Contratti in scadenza e scaduti da poco</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Buste paga del mese ancora da inviare</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Dipendenti senza email, che non riceverebbero il cedolino</li>
+        </ul>
+      </div>
+      <div class="rv">
+        <button class="zoom" type="button" data-src="img/home.webp" data-cap="La Home con le cose da fare del giorno">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>Home</span></span><img src="img/home.webp" width="1600" height="1000" loading="lazy" alt="La Home con numeri del mese, cose da fare e attività recenti"></span>
+        </button>
+        <p class="zoom-hint"><svg class="i"><use href="#i-zoom"/></svg>Clicca per ingrandire</p>
       </div>
     </div>
-    <div class="glass">
-      <div class="win">
-        <div class="win-bar"><i></i><i></i><i></i><span class="url">presidium · gestione personale</span></div>
-        <div class="win-body">
-          <div class="pv-tiles">
-            <div class="pv-tile"><div class="l">Dipendenti</div><div class="v num">24</div></div>
-            <div class="pv-tile"><div class="l">Contratti attivi</div><div class="v num">21</div></div>
-            <div class="pv-tile"><div class="l">Buste · Luglio</div><div class="v num">21<small>/24</small></div></div>
-          </div>
-          <div class="pv-chart">
-            <div class="h">Ore lavorate · ultime settimane</div>
-            <div class="pv-bars"><span style="height:58%"></span><span style="height:66%"></span><span style="height:52%"></span><span style="height:74%"></span><span style="height:92%"></span></div>
-          </div>
-        </div>
+
+    <div class="feature flip">
+      <div class="f-text rv">
+        <p class="kicker">Buste paga</p>
+        <h2>Il PDF del consulente si smista da solo</h2>
+        <p>Trascinate il file che vi manda il consulente, anche uno solo con tutti i cedolini del mese.</p>
+        <ul class="ticks">
+          <li><svg class="i"><use href="#i-check"/></svg>Lo divide e riconosce dipendente e società dalla partita IVA</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Segnala i doppioni prima di salvarli</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Lo storico di ogni persona resta nella sua scheda</li>
+        </ul>
       </div>
-      <div class="pv-float a"><div class="d" style="background:var(--amber-soft);color:var(--amber)"><svg class="i" style="width:17px;height:17px"><use href="#s-bell"/></svg></div><div>3 contratti<small>in scadenza</small></div></div>
-      <div class="pv-float b"><div class="d" style="background:var(--brand-soft);color:var(--brand)"><svg class="i" style="width:17px;height:17px"><use href="#s-check"/></svg></div><div>Buste paga<small>inviate ✓</small></div></div>
+      <div class="rv">
+        <button class="zoom" type="button" data-src="img/buste-paga.webp" data-cap="Le buste paga del mese, con la società riconosciuta e lo stato dell'invio">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>Buste paga</span></span><img src="img/buste-paga.webp" width="1600" height="1000" loading="lazy" alt="Elenco delle buste paga del mese con società riconosciuta, stato di invio e netto"></span>
+        </button>
+        <p class="zoom-hint"><svg class="i"><use href="#i-zoom"/></svg>Clicca per ingrandire</p>
+      </div>
     </div>
-  </div></header>
 
-  <!-- STRIP -->
-  <div class="strip"><div class="wrap strip-in">Un unico strumento per <b>segreteria</b>, <b>amministrazione</b> e <b>direzione</b> — al posto di fogli Excel, cartelle sparse ed email.</div></div>
+    <div class="feature">
+      <div class="f-text rv">
+        <p class="kicker">Invio</p>
+        <h2>Tutte le buste del mese, con un clic</h2>
+        <p>Ogni dipendente riceve la sua busta paga in allegato, in un'email con il nome della scuola.</p>
+        <ul class="ticks">
+          <li><svg class="i"><use href="#i-check"/></svg>Chi non ha l'email viene segnalato e resta da inviare</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Se un PDF manca, l'email non parte: nessun invio a vuoto</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Ogni invio resta registrato in «Email inviate»</li>
+        </ul>
+      </div>
+      <div class="rv">
+        <button class="zoom" type="button" data-src="img/invio.webp" data-cap="La conferma prima di inviare le buste paga del mese">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>Buste paga</span></span><img src="img/invio.webp" width="1600" height="1000" loading="lazy" alt="Finestra di conferma per inviare le buste paga del mese"></span>
+        </button>
+        <p class="zoom-hint"><svg class="i"><use href="#i-zoom"/></svg>Clicca per ingrandire</p>
+      </div>
+    </div>
 
-  <!-- FEATURES -->
-  <section class="blk" id="funzioni"><div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Funzionalità</span>
-      <h2>Tutto quello che serve per gestire il personale</h2>
-      <p>Dalla prima assunzione alla busta paga, ogni cosa al suo posto e a portata di clic.</p>
+    <div class="feature flip">
+      <div class="f-text rv">
+        <p class="kicker">Dipendenti e contratti</p>
+        <h2>Ogni contratto, a colpo d'occhio</h2>
+        <p>Tutto il personale in un elenco: chi è in forza, chi è in scadenza, chi ha lasciato la scuola.</p>
+        <ul class="ticks">
+          <li><svg class="i"><use href="#i-check"/></svg>Scadenza, ultima busta paga e netto sulla stessa riga</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Una scheda per persona: anagrafica, contratti, buste paga, documenti, presenze</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Rinnovo del contratto in un clic, esportazione in Excel quando serve</li>
+        </ul>
+      </div>
+      <div class="rv">
+        <button class="zoom" type="button" data-src="img/dipendenti.webp" data-cap="L'elenco dei dipendenti con contratto, scadenza e netto">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>Dipendenti</span></span><img src="img/dipendenti.webp" width="1600" height="1000" loading="lazy" alt="Elenco dei dipendenti con contratto, scadenza, ultima busta paga e netto"></span>
+        </button>
+        <p class="zoom-hint"><svg class="i"><use href="#i-zoom"/></svg>Clicca per ingrandire</p>
+      </div>
     </div>
-    <div class="feat">
-      <div class="fcard reveal"><div class="fico"><svg class="i"><use href="#s-users"/></svg></div><h3>Anagrafiche dipendenti</h3><p>Tutti i dati del personale in schede ordinate: contatti, ruolo, storico e documenti collegati.</p></div>
-      <div class="fcard reveal"><div class="fico"><svg class="i"><use href="#s-contract"/></svg></div><h3>Contratti & scadenze</h3><p>Tieni sotto controllo i contratti e ricevi avvisi automatici prima che scadano. Mai più rinnovi dimenticati.</p></div>
-      <div class="fcard reveal"><div class="fico"><svg class="i"><use href="#s-euro"/></svg></div><h3>Buste paga</h3><p>Carica i cedolini in PDF, il sistema li smista per dipendente e li invia via email con un clic.</p></div>
-      <div class="fcard reveal"><div class="fico"><svg class="i"><use href="#s-shield"/></svg></div><h3>Documenti & sicurezza</h3><p>Attestati primo soccorso, antincendio, RSPP, RLS, idoneità, titoli di studio: tutto archiviato e ritrovabile.</p></div>
-      <div class="fcard reveal"><div class="fico"><svg class="i"><use href="#s-cal"/></svg></div><h3>Presenze & assenze</h3><p>Registro ore mensile con conteggio automatico di assenze, ferie e permessi. Esportabile quando serve.</p></div>
-      <div class="fcard reveal"><div class="fico"><svg class="i"><use href="#s-lock"/></svg></div><h3>Accesso con ruoli</h3><p>Ogni persona vede solo ciò che le compete: la direzione tutto, la segreteria il quotidiano. Dati protetti.</p></div>
-    </div>
-  </div></section>
 
-  <!-- BENEFITS -->
-  <div class="band"><section class="blk"><div class="wrap">
-    <div class="bene">
-      <div class="b reveal"><div class="bi"><svg class="i"><use href="#s-clock"/></svg></div><h3>Risparmi ore ogni settimana</h3><p>Basta cercare tra cartelle ed email: trovi tutto in pochi secondi, da un solo posto.</p></div>
-      <div class="b reveal"><div class="bi"><svg class="i"><use href="#s-bell"/></svg></div><h3>Nessuna scadenza dimenticata</h3><p>Contratti e certificati di sicurezza ti avvisano da soli, prima che sia troppo tardi.</p></div>
-      <div class="b reveal"><div class="bi"><svg class="i"><use href="#s-cloud"/></svg></div><h3>Accessibile a tutto lo staff</h3><p>Funziona dal browser, senza installare nulla. Ognuno accede con il proprio account.</p></div>
+    <div class="feature">
+      <div class="f-text rv">
+        <p class="kicker">Presenze</p>
+        <h2>Le presenze del mese, pronte per il consulente</h2>
+        <p>Il foglio mensile di tutto il personale, con il conto delle ore già fatto.</p>
+        <ul class="ticks">
+          <li><svg class="i"><use href="#i-check"/></svg>Ore giuste, ore in più e ore mancanti a colpo d'occhio</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Ferie, malattia e permessi con il giustificativo allegato</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Esportazione e importazione in Excel</li>
+        </ul>
+      </div>
+      <div class="rv">
+        <button class="zoom" type="button" data-src="img/presenze.webp" data-cap="Il foglio mensile delle presenze di tutto il personale">
+          <span class="frame"><span class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>Presenze</span></span><img src="img/presenze.webp" width="1600" height="1000" loading="lazy" alt="Foglio mensile delle presenze con ore per giorno e totali"></span>
+        </button>
+        <p class="zoom-hint"><svg class="i"><use href="#i-zoom"/></svg>Clicca per ingrandire</p>
+      </div>
     </div>
-  </div></section></div>
+  </div>
+</section>
 
-  <!-- STEPS -->
-  <section class="blk" id="come"><div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Come funziona</span>
-      <h2>Attivo per la tua scuola in tre passi</h2>
+<!-- ALTRO -->
+<section class="blk alt" aria-labelledby="more-title">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="kicker">E poi</p>
+      <h2 id="more-title">I dettagli che fanno risparmiare tempo</h2>
     </div>
-    <div class="steps">
-      <div class="step reveal"><h3>Richiedi una demo</h3><p>Compili il modulo qui sotto e ti ricontatto per mostrarti il gestionale dal vivo.</p></div>
-      <div class="step reveal"><h3>Configuriamo insieme</h3><p>Adattiamo il sistema alla tua scuola: personale, ruoli e documenti già pronti.</p></div>
-      <div class="step reveal"><h3>Lo staff lavora subito</h3><p>Ogni collaboratore accede dal browser e inizia a usarlo, senza complicazioni.</p></div>
+    <div class="cards">
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-import"/></svg></div><h3>Si parte dalle buste paga</h3><p>I dipendenti si importano dai cedolini del consulente: niente da ricopiare a mano.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-plus"/></svg></div><h3>Nuovo dipendente in quattro passi</h3><p>Dati, contratto, orario e riepilogo, con i controlli già fatti.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-search"/></svg></div><h3>Ricerca veloce</h3><p>Da qualsiasi schermata trovate una persona per nome o codice fiscale.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-file"/></svg></div><h3>Documenti in ordine</h3><p>Attestati, idoneità, titoli e giustificativi archiviati nella scheda di ogni persona.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-building"/></svg></div><h3>Più società</h3><p>Scuola, cooperativa, associazione: ogni busta paga va alla società giusta.</p></div>
+      <div class="card rv"><div class="ico"><svg class="i"><use href="#i-palette"/></svg></div><h3>Con il vostro marchio</h3><p>Nome, logo e colore della scuola si impostano in un minuto. Tema chiaro o scuro.</p></div>
     </div>
-  </div></section>
 
-  <!-- DEMO -->
-  <section class="blk" id="demo" style="padding-top:20px"><div class="wrap">
-    <div class="demo reveal">
+    <div class="head rv" style="margin-top:96px;margin-bottom:32px">
+      <p class="kicker">Ex dipendenti</p>
+      <h2>Chi lascia la scuola resta in archivio, come chiede la legge</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl rv"><p class="yrs">0–5 anni</p><h3>Conservati</h3><p>Dalla data di cessazione i dati restano tutti e non si possono eliminare.</p></div>
+      <div class="tl rv"><p class="yrs" style="color:#3c56a6">5–10 anni</p><h3>Protetti</h3><p>I dati personali restano nascosti e si mostrano solo quando servono.</p></div>
+      <div class="tl rv"><p class="yrs" style="color:#4a5f9e">Dopo 10 anni</p><h3>Eliminabili</h3><p>Si possono cancellare per sempre, confermando con il cognome della persona.</p></div>
+    </div>
+    <p class="note rv">Se una persona torna a lavorare da voi, il codice fiscale la ritrova: si riattiva in un clic, senza doppioni.</p>
+  </div>
+</section>
+
+<!-- SICUREZZA -->
+<section class="blk dark" id="sicurezza" aria-labelledby="s-title">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="kicker">Dati e sicurezza</p>
+      <h2 id="s-title">I vostri dati restano a scuola</h2>
+      <p class="lead">Presidium si installa sui computer della scuola. Non c'è un archivio dei dipendenti su server esterni.</p>
+    </div>
+    <div class="dcards">
+      <div class="dcard rv"><svg class="i"><use href="#i-pc"/></svg><h3>Sul vostro computer</h3><p>Archivio e documenti stanno sul PC della scuola.</p></div>
+      <div class="dcard rv"><svg class="i"><use href="#i-cloud"/></svg><h3>Una copia ogni giorno</h3><p>Anche sul vostro OneDrive: se il PC si guasta, i dati ci sono.</p></div>
+      <div class="dcard rv"><svg class="i"><use href="#i-trash"/></svg><h3>Cestino di 30 giorni</h3><p>I file cancellati restano nel cestino 30 giorni prima di sparire.</p></div>
+      <div class="dcard rv"><svg class="i"><use href="#i-refresh"/></svg><h3>Aggiornamenti automatici</h3><p>Le novità arrivano da sole e vengono controllate prima di installarsi.</p></div>
+      <div class="dcard rv"><svg class="i"><use href="#i-net"/></svg><h3>Più postazioni in rete</h3><p>Direzione e segreteria lavorano sullo stesso archivio dalla rete interna.</p></div>
+      <div class="dcard rv"><svg class="i"><use href="#i-shield"/></svg><h3>Copie sotto controllo</h3><p>Lo stato delle copie arriva a noi: se una non riesce, lo vediamo.</p></div>
+    </div>
+    <p class="privacy rv">A noi arrivano solo dati tecnici, come la versione del programma e lo stato delle copie, per darvi assistenza. Una copia di emergenza, cifrata, si fa solo d'accordo con voi.</p>
+  </div>
+</section>
+
+<!-- RIFERIMENTO + PARTENZA -->
+<section class="blk" id="partenza" aria-labelledby="p-title">
+  <div class="wrap">
+    <div class="ref rv">
+      <div class="badge" aria-hidden="true"><svg class="i"><use href="#i-school"/></svg></div>
       <div>
-        <span class="eyebrow" style="color:#5EEAD4">Provalo con i tuoi occhi</span>
-        <h2 style="margin-top:12px">Esplora il gestionale, schermata per schermata</h2>
-        <p>Una demo interattiva completa: dashboard, dipendenti, contratti, buste paga e altro. Nessuna registrazione.</p>
+        <p class="k">Chi lo usa già</p>
+        <h3>Campus Don Bosco</h3>
+        <p class="d">Presidium è nato lì ed è in uso ogni giorno per personale, contratti e buste paga.</p>
       </div>
-      <a class="btn btn-white" href="./demo/" target="_blank" rel="noopener" style="font-size:16px;padding:15px 26px">Apri la demo <svg class="i"><use href="#s-arrow"/></svg></a>
     </div>
-  </div></section>
 
-  <!-- CONTACT -->
-  <section class="blk" id="contatti"><div class="wrap">
-    <div class="contact">
-      <div class="contact-left reveal">
-        <span class="eyebrow">Contatti</span>
-        <h2 style="margin-top:14px">Vuoi vederlo per la tua scuola?</h2>
-        <p>Lasciami i tuoi dati: ti ricontatto per una demo gratuita e senza impegno, mostrandoti come funziona nel concreto.</p>
-        <div class="clist">
-          <div class="ci"><div class="k"><svg class="i"><use href="#s-play"/></svg></div><div><b>Demo personalizzata</b><span>Vedi il gestionale con esempi reali della tua realtà</span></div></div>
-          <div class="ci"><div class="k"><svg class="i"><use href="#s-clock"/></svg></div><div><b>Risposta rapida</b><span>Ti ricontatto entro pochi giorni lavorativi</span></div></div>
-          <div class="ci"><div class="k"><svg class="i"><use href="#s-shield"/></svg></div><div><b>Nessun impegno</b><span>Una chiacchierata per capire se fa al caso tuo</span></div></div>
-        </div>
-      </div>
-      <div class="form-card reveal">
-        <form id="leadForm" novalidate>
-          <div class="frow">
-            <div class="fg"><label>Nome e cognome <span class="req">*</span></label><input name="nome" required placeholder="Mario Rossi"></div>
-            <div class="fg"><label>Scuola / Ente <span class="req">*</span></label><input name="scuola" required placeholder="Es. Istituto ..."></div>
-          </div>
-          <div class="frow">
-            <div class="fg"><label>Email <span class="req">*</span></label><input type="email" name="email" required placeholder="nome@scuola.it"></div>
-            <div class="fg"><label>Telefono</label><input name="telefono" placeholder="Facoltativo"></div>
-          </div>
-          <div class="fg"><label>Messaggio</label><textarea name="messaggio" placeholder="Raccontami brevemente cosa ti serve…"></textarea></div>
-          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
-          <button class="btn btn-primary" type="submit" id="leadBtn" style="width:100%;padding:14px">Richiedi la demo <svg class="i"><use href="#s-arrow"/></svg></button>
-          <div class="form-err" id="leadErr"></div>
-          <div class="form-note">Rispetto la tua privacy: i dati servono solo a ricontattarti. Niente spam.</div>
-        </form>
-        <div class="form-msg" id="leadOk">
-          <div class="ok"><svg class="i"><use href="#s-check"/></svg></div>
-          <h3>Richiesta inviata!</h3>
-          <p>Grazie, ho ricevuto i tuoi dati. Ti ricontatto al più presto per organizzare la demo.</p>
-        </div>
-      </div>
+    <div class="head rv" style="margin-top:96px">
+      <p class="kicker">Come si parte</p>
+      <h2 id="p-title">Vi accompagniamo dal primo giorno</h2>
     </div>
-  </div></section>
+    <ol class="steps">
+      <li class="step rv"><h3>Dimostrazione</h3><p>Vi mostriamo Presidium sul vostro caso, rispondendo alle vostre domande.</p></li>
+      <li class="step rv"><h3>Installazione</h3><p>Sui PC della scuola, con le vostre società e il vostro marchio.</p></li>
+      <li class="step rv"><h3>Primi dati</h3><p>Importiamo i dipendenti dalle buste paga e vi affianchiamo per il resto.</p></li>
+      <li class="step rv"><h3>Formazione</h3><p>Un incontro con chi lo userà, poi assistenza quando serve.</p></li>
+    </ol>
+    <p class="steps-note rv">Prima di partire controlliamo insieme un cedolino del vostro consulente, per essere sicuri che venga letto bene.</p>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="ft"><div class="wrap ft-in">
-    <div>
-      <a class="logo" href="#top"><span class="logo-mark"><svg viewBox="0 0 24 24"><use href="#s-cap"/></svg></span>Presidium</a>
-      <small style="display:block;margin-top:10px">Il gestionale del personale per le scuole.</small>
+<!-- PREZZI -->
+<section class="blk alt" id="prezzi" aria-labelledby="pr-title">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="kicker">Prezzi</p>
+      <h2 id="pr-title">Semplici, in base al personale</h2>
+      <p class="lead">Si contano solo i dipendenti in forza: gli ex dipendenti in archivio non contano. Con l'abbonamento annuale pagate 10 mesi invece di 12.</p>
     </div>
-    <div class="ft-links">
-      <a href="#funzioni">Funzionalità</a><a href="#demo">Demo</a><a href="#contatti">Contatti</a>
+    <div class="tiers">
+      <div class="tier rv"><p class="who">Fino a 20 dipendenti</p><p class="price"><b>49 €</b><span>/ mese</span></p><p class="year">oppure <b>490 €</b> l'anno</p></div>
+      <div class="tier rv"><p class="who">Da 21 a 50</p><p class="price"><b>89 €</b><span>/ mese</span></p><p class="year">oppure <b>890 €</b> l'anno</p></div>
+      <div class="tier rv"><p class="who">Da 51 a 100</p><p class="price"><b>149 €</b><span>/ mese</span></p><p class="year">oppure <b>1.490 €</b> l'anno</p></div>
+      <div class="tier rv"><p class="who">Oltre 100</p><p class="price"><b>199 €</b><span>/ mese</span></p><p class="year">oppure <b>1.990 €</b> l'anno</p></div>
     </div>
-    <small>© 2026 Presidium · Prodotto in early access</small>
-  </div></footer>
+    <div class="included">
+      <div class="box rv">
+        <h3>Sempre compreso</h3>
+        <ul class="ticks">
+          <li><svg class="i"><use href="#i-check"/></svg>Tutte le postazioni della scuola</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Tutte le società</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Aggiornamenti</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Copie giornaliere dei dati</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Assistenza a distanza</li>
+          <li><svg class="i"><use href="#i-check"/></svg>Risposta entro un giorno lavorativo</li>
+        </ul>
+      </div>
+      <div class="box rv">
+        <h3>Attivazione</h3>
+        <p class="big">300 € <span style="font-size:16px;font-weight:500;color:var(--subtle)">una tantum</span></p>
+        <p>Installazione, configurazione, importazione dei dipendenti e formazione.</p>
+      </div>
+    </div>
+    <p class="price-note rv">Prezzi IVA esclusa. Visite in sede e formazione di personale nuovo si concordano a parte.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="blk" id="domande" aria-labelledby="q-title">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="kicker">Domande frequenti</p>
+      <h2 id="q-title">Le domande che ci fanno più spesso</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>Cosa serve per usarlo?<svg class="i"><use href="#i-plus"/></svg></summary><p>Un PC con Windows 10 o 11 e la connessione a internet, per le email e gli aggiornamenti. Consigliamo OneDrive per tenere una copia dei dati fuori dal computer.</p></details>
+      <details><summary>Funziona anche su Mac?<svg class="i"><use href="#i-plus"/></svg></summary><p>No, per ora Presidium funziona solo su Windows.</p></details>
+      <details><summary>Possiamo usarlo da più computer?<svg class="i"><use href="#i-plus"/></svg></summary><p>Sì. Direzione e segreteria lavorano sullo stesso archivio dalla rete interna della scuola, senza costi in più per le postazioni.</p></details>
+      <details><summary>Il consulente del lavoro deve cambiare qualcosa?<svg class="i"><use href="#i-plus"/></svg></summary><p>No. Usate i PDF che vi manda già oggi. Prima di partire controlliamo insieme un suo cedolino, per essere sicuri che Presidium lo legga bene.</p></details>
+      <details><summary>Da quale indirizzo partono le buste paga?<svg class="i"><use href="#i-plus"/></svg></summary><p>Ogni email porta il nome della vostra scuola. Può partire dalla casella della scuola oppure dal nostro servizio di invio, se preferite non configurarne una.</p></details>
+      <details><summary>Dove stanno i dati? E se il PC si rompe?<svg class="i"><use href="#i-plus"/></svg></summary><p>I dati stanno sul PC della scuola e ogni giorno se ne fa una copia, anche sul vostro OneDrive. Se il computer si guasta, vi aiutiamo a reinstallare Presidium e a ripartire dall'ultima copia.</p></details>
+      <details><summary>Abbiamo più società: scuola, cooperativa, associazione…<svg class="i"><use href="#i-plus"/></svg></summary><p>Nessun problema. Presidium riconosce la società di ogni cedolino dalla partita IVA e le tiene separate. Le società sono comprese nel prezzo.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section class="blk alt" id="contatti" aria-labelledby="c-title">
+  <div class="wrap contact">
+    <div class="rv">
+      <p class="kicker">Contatti</p>
+      <h2 id="c-title" style="margin-top:12px">Vediamolo insieme, sul caso della vostra scuola</h2>
+      <p class="lead">Lasciate i vostri dati: vi ricontatto per una dimostrazione gratuita e senza impegno.</p>
+      <ul class="clist">
+        <li><span class="k"><svg class="i"><use href="#i-clock"/></svg></span><div><b>Risposta entro un giorno lavorativo</b><span>Vi scrivo o vi chiamo per fissare la dimostrazione.</span></div></li>
+        <li><span class="k"><svg class="i"><use href="#i-pc"/></svg></span><div><b>A distanza, sul vostro caso</b><span>Bastano mezz'ora e un collegamento video.</span></div></li>
+        <li><span class="k"><svg class="i"><use href="#i-mail"/></svg></span><div><b>Preferite scrivere?</b><span><a href="mailto:paolo@presidium-app.com">paolo@presidium-app.com</a></span></div></li>
+      </ul>
+    </div>
+    <div class="form-card rv">
+      <form id="leadForm" novalidate>
+        <div class="frow">
+          <div class="fg"><label for="f-nome">Nome e cognome <span class="req">*</span></label><input id="f-nome" name="nome" required autocomplete="name"></div>
+          <div class="fg"><label for="f-scuola">Scuola <span class="req">*</span></label><input id="f-scuola" name="scuola" required autocomplete="organization"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" type="email" name="email" required autocomplete="email" placeholder="nome@scuola.it"></div>
+          <div class="fg"><label for="f-tel">Telefono</label><input id="f-tel" type="tel" name="telefono" autocomplete="tel" placeholder="Facoltativo"></div>
+        </div>
+        <div class="fg"><label for="f-msg">Messaggio</label><textarea id="f-msg" name="messaggio" placeholder="Quanti dipendenti avete? Cosa vi farebbe risparmiare più tempo?"></textarea></div>
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-primary" type="submit" id="leadBtn" style="width:100%;padding:15px">Richiedi la dimostrazione <svg class="i"><use href="#i-arrow"/></svg></button>
+        <div class="form-err" id="leadErr" role="alert"></div>
+        <p class="form-note">I dati servono solo a ricontattarvi. Niente newsletter, niente spam.</p>
+      </form>
+      <div class="form-ok" id="leadOk" role="status" tabindex="-1">
+        <div class="okc"><svg class="i"><use href="#i-check"/></svg></div>
+        <h3>Richiesta inviata</h3>
+        <p>Grazie. Vi ricontatto entro un giorno lavorativo per fissare la dimostrazione.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-in">
+      <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true">P</span><span><b>Presidium</b><small>Personale e buste paga per le scuole</small></span></a>
+      <nav class="ft-links" aria-label="Collegamenti">
+        <a href="#funzioni">Cosa fa</a><a href="#prezzi">Prezzi</a><a href="#domande">Domande</a><a href="mailto:paolo@presidium-app.com">paolo@presidium-app.com</a>
+      </nav>
+    </div>
+    <p class="ft-bottom">© 2026 Presidium · Paolo Pulvirenti</p>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-label="Schermata ingrandita">
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+  <button type="button" id="lbClose" aria-label="Chiudi"><svg class="i"><use href="#i-x"/></svg></button>
+</dialog>
 
 <script>
-  (function(){
-    // >>> Web3Forms access key (le richieste arrivano sull'email collegata alla key) <<<
-    var WEB3FORMS_KEY = "80893bea-f4fb-4d73-b580-9d125fa374a6";
+(function(){
+  // Web3Forms: le richieste arrivano all'email collegata alla chiave
+  var WEB3FORMS_KEY = "80893bea-f4fb-4d73-b580-9d125fa374a6";
 
-    var form=document.getElementById('leadForm');
-    var btn=document.getElementById('leadBtn');
-    var err=document.getElementById('leadErr');
-    var ok=document.getElementById('leadOk');
+  var form=document.getElementById('leadForm');
+  var btn=document.getElementById('leadBtn');
+  var err=document.getElementById('leadErr');
+  var ok=document.getElementById('leadOk');
 
-    form.addEventListener('submit',function(e){
-      e.preventDefault();
-      err.style.display='none';
-      if(form._honey.value){return;} // bot
-      if(!form.nome.value.trim()||!form.scuola.value.trim()||!form.email.value.trim()){
-        err.textContent='Compila i campi obbligatori (nome, scuola, email).'; err.style.display='block'; return;
-      }
-      btn.disabled=true; var old=btn.innerHTML; btn.innerHTML='Invio in corso…';
-      var payload={
+  function showErr(t){err.textContent=t;err.style.display='block';}
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    err.style.display='none';
+    if(form._honey.value){return;}
+    if(!form.nome.value.trim()||!form.scuola.value.trim()||!form.email.value.trim()){
+      showErr('Compilate i campi obbligatori: nome, scuola ed email.'); return;
+    }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())){
+      showErr("Controllate l'indirizzo email."); return;
+    }
+    btn.disabled=true; var old=btn.innerHTML; btn.textContent='Invio in corso…';
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
         access_key:WEB3FORMS_KEY,
-        name:form.nome.value, scuola:form.scuola.value, email:form.email.value,
-        telefono:form.telefono.value||'—', message:form.messaggio.value||'—',
-        subject:'Nuova richiesta demo — Presidium ('+form.scuola.value+')'
-      };
-      fetch('https://api.web3forms.com/submit',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body:JSON.stringify(payload)
-      }).then(function(r){return r.json()}).then(function(data){
-        if(!data.success){throw new Error(data.message||'fail');}
-        form.style.display='none'; ok.style.display='block';
-        ok.scrollIntoView({block:'center',behavior:'smooth'});
-      }).catch(function(){
-        btn.disabled=false; btn.innerHTML=old;
-        err.textContent='Ops, invio non riuscito. Riprova tra poco o scrivimi direttamente via email.';
-        err.style.display='block';
-      });
+        subject:'Nuova richiesta di dimostrazione — Presidium ('+form.scuola.value.trim()+')',
+        from_name:'Sito Presidium',
+        name:form.nome.value.trim(), scuola:form.scuola.value.trim(), email:form.email.value.trim(),
+        telefono:form.telefono.value.trim()||'—', message:form.messaggio.value.trim()||'—'
+      })
+    }).then(function(r){return r.json()}).then(function(d){
+      if(!d.success){throw new Error(d.message||'invio non riuscito');}
+      form.style.display='none'; ok.style.display='block'; ok.focus();
+    }).catch(function(){
+      btn.disabled=false; btn.innerHTML=old;
+      showErr('Invio non riuscito. Riprovate tra poco oppure scrivete a paolo@presidium-app.com.');
     });
+  });
 
-    // reveal on scroll
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.12});
-      Array.prototype.forEach.call(document.querySelectorAll('.reveal'),function(el){io.observe(el)});
-    } else { Array.prototype.forEach.call(document.querySelectorAll('.reveal'),function(el){el.classList.add('in')}); }
-  })();
+  // ingrandimento delle schermate
+  var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
+  Array.prototype.forEach.call(document.querySelectorAll('.zoom'),function(b){
+    b.addEventListener('click',function(){
+      if(!lb.showModal){window.open(b.getAttribute('data-src'),'_blank');return;}
+      lbImg.src=b.getAttribute('data-src'); lbImg.alt=b.getAttribute('data-cap'); lbCap.textContent=b.getAttribute('data-cap');
+      lb.showModal();
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click',function(){lb.close();});
+  lb.addEventListener('click',function(e){if(e.target===lb){lb.close();}});
+
+  // comparsa allo scorrimento
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    Array.prototype.forEach.call(els,function(el){io.observe(el);});
+  } else {
+    Array.prototype.forEach.call(els,function(el){el.classList.add('in');});
+  }
+})();
 </script>
 </body>
 </html>
