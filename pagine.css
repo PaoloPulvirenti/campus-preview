@@ -1,0 +1,127 @@
+/* Stile comune delle pagine di approfondimento (buste paga, gestionale, cooperative). Stessi colori e caratteri della home. */
+@font-face{font-family:"Figtree";font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/figtree-latin.woff2) format("woff2")}
+:root{
+  --ink:#141b2b;--ink-2:#1d2638;--ink-line:#2c3750;
+  --text:#1f2937;--muted:#4a5568;--subtle:#6b7588;
+  --bg-2:#f5f6f8;--line:#e3e6ec;
+  --brand:#25408f;--brand-dark:#1a2f6c;--brand-soft:#e8edf9;--brand-light:#9db2f2;
+  --r-lg:20px;
+  --ff:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow-sm:0 1px 2px rgba(20,27,43,.06);
+  --shadow:0 1px 3px rgba(20,27,43,.06),0 8px 24px -12px rgba(20,27,43,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--ff);color:var(--text);background:#fff;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--brand-light);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.testo > *{max-width:720px}
+svg.i{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* barra in alto */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(12px);-webkit-backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:20px;height:68px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+.logo-mark{width:36px;height:36px;border-radius:10px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px}
+.logo b{display:block;font-size:18px;font-weight:800;letter-spacing:-.3px;line-height:1.1}
+.logo small{display:block;font-size:12.5px;color:var(--subtle);line-height:1.2}
+
+/* pulsanti */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-size:16px;font-weight:650;padding:13px 22px;border-radius:12px;border:1px solid transparent;text-decoration:none;white-space:nowrap;transition:background .15s}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 20px -10px rgba(37,64,143,.7)}
+.btn-primary:hover{background:var(--brand-dark)}
+.btn-white{background:#fff;color:var(--brand-dark)}
+.btn-white:hover{background:var(--brand-soft)}
+.btn-sm{padding:9px 16px;font-size:15px;border-radius:10px}
+.nav .btn{margin-left:auto}
+
+/* apertura */
+.apertura{background:var(--ink);color:#c3cbdd;position:relative;overflow:hidden}
+.apertura::before{content:"";position:absolute;inset:0;background:radial-gradient(800px 420px at 90% -20%,rgba(54,84,179,.5),transparent 60%)}
+.apertura .wrap{position:relative;padding-top:72px;padding-bottom:80px}
+.briciole{font-size:14px;color:#8b96ad}
+.briciole a{color:#b8c1d6;text-decoration:none}
+.briciole a:hover{color:#fff}
+.apertura h1{color:#f6f8fd;font-size:clamp(34px,4.4vw,52px);line-height:1.08;font-weight:800;letter-spacing:-.03em;margin-top:16px;max-width:820px;text-wrap:balance}
+.apertura .lead{font-size:19px;margin-top:20px;max-width:640px}
+.apertura .btn{margin-top:30px}
+
+/* blocchi */
+.blk{padding:80px 0}
+.blk.alt{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.kicker{font-size:14px;font-weight:700;letter-spacing:.4px;color:var(--brand)}
+h2{color:var(--ink);font-size:clamp(28px,3.2vw,38px);line-height:1.12;font-weight:800;letter-spacing:-.02em;text-wrap:balance;margin-top:10px}
+h3{color:var(--ink);font-size:19px;line-height:1.3;font-weight:700}
+.blk p.intro{margin-top:14px;color:var(--muted);font-size:18px}
+.testo p+p{margin-top:14px}
+
+.due{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:56px;align-items:center}
+.due > *{min-width:0}
+
+.ticks{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:13px}
+.ticks li{display:flex;gap:12px;align-items:flex-start}
+.ticks li svg{width:22px;height:22px;color:var(--brand);background:var(--brand-soft);border-radius:50%;padding:4px;margin-top:2px;stroke-width:2.4}
+
+.passi{list-style:none;counter-reset:p;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+.passi li{counter-increment:p;border-top:5px solid var(--brand);padding-top:18px}
+.passi li::before{content:counter(p);display:block;font-size:38px;font-weight:800;color:var(--brand);line-height:1}
+.passi h3{margin-top:10px}
+.passi p{margin-top:6px;color:var(--muted);font-size:16px}
+
+.oggi{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:10px;counter-reset:o}
+.oggi li{counter-increment:o;display:flex;gap:14px;align-items:baseline;color:var(--muted)}
+.oggi li::before{content:counter(o);font-weight:800;color:var(--subtle);min-width:18px}
+
+.schede{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.scheda{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow-sm)}
+.scheda p{margin-top:8px;color:var(--muted);font-size:16px}
+
+.frame{display:block;background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+.frame-bar{display:flex;align-items:center;gap:7px;height:30px;padding:0 12px;background:#eceff4;border-bottom:1px solid var(--line)}
+.frame-bar i{width:10px;height:10px;border-radius:50%;background:#cfd5df}
+.frame-bar span{margin:0 auto;font-size:12px;color:var(--subtle);font-weight:600;transform:translateX(-18px)}
+.didascalia{margin-top:10px;font-size:14px;color:var(--subtle)}
+
+.nota{margin-top:28px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:16px 20px}
+
+.domande{margin-top:28px;display:flex;flex-direction:column;gap:26px}
+.domande h3{font-size:18px}
+.domande p{margin-top:6px;color:var(--muted)}
+
+/* invito finale */
+.invito{background:var(--brand);color:#dfe6f8;border-radius:var(--r-lg);padding:44px 48px;display:flex;gap:28px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.invito h2{color:#fff;margin-top:0;font-size:clamp(26px,2.8vw,34px)}
+.invito p{margin-top:8px;max-width:560px}
+
+.altre{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.altre a{display:flex;justify-content:space-between;align-items:center;gap:14px;text-decoration:none;color:var(--ink);font-weight:650;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.altre a:hover{border-color:var(--brand)}
+.altre a svg{color:var(--brand)}
+
+/* piede */
+.ft{background:var(--ink);color:#9aa4ba;padding:40px 0;font-size:15px}
+.ft-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ft a{color:#c9d1e3;text-decoration:none}
+.ft a:hover{color:#fff}
+.ft-links{display:flex;gap:10px 22px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .due{grid-template-columns:1fr;gap:32px}
+  .passi{grid-template-columns:1fr 1fr}
+  .schede{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding-left:16px;padding-right:16px}
+  .logo small{display:none}
+  .nav .btn{padding:9px 13px;font-size:14px}
+  .apertura .wrap{padding-top:52px;padding-bottom:60px}
+  .apertura .btn{width:100%}
+  .blk{padding:60px 0}
+  .passi,.schede,.altre{grid-template-columns:1fr}
+  .invito{padding:30px 24px}
+  .invito .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
