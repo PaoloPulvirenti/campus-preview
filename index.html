@@ -18,6 +18,46 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2325408f'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='700' fill='white' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://presidium-app.com/#organizzazione",
+      "name": "Presidium",
+      "url": "https://presidium-app.com/",
+      "email": "paolo@presidium-app.com",
+      "areaServed": "IT"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://presidium-app.com/#sito",
+      "name": "Presidium",
+      "url": "https://presidium-app.com/",
+      "inLanguage": "it",
+      "publisher": { "@id": "https://presidium-app.com/#organizzazione" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Presidium",
+      "url": "https://presidium-app.com/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Windows",
+      "inLanguage": "it",
+      "description": "Programma per le segreterie delle scuole: dipendenti, contratti, buste paga e presenze in un unico posto. Divide il PDF delle buste paga del consulente e invia a ogni dipendente la sua.",
+      "publisher": { "@id": "https://presidium-app.com/#organizzazione" },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "EUR",
+        "lowPrice": "49",
+        "highPrice": "199",
+        "offerCount": "4"
+      }
+    }
+  ]
+}
+</script>
 <style>
   @font-face{font-family:"Figtree";font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/figtree-latin.woff2) format("woff2")}
 
@@ -122,6 +162,8 @@
   .ticks{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:14px}
   .ticks li{display:flex;gap:12px;align-items:flex-start;font-size:16.5px;color:var(--text)}
   .ticks li svg{width:22px;height:22px;color:var(--brand);background:var(--brand-soft);border-radius:50%;padding:4px;margin-top:1px;stroke-width:2.4}
+  .f-link{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-weight:650;font-size:16.5px;color:var(--brand);text-decoration:none}
+  .f-link:hover{color:var(--brand-dark);text-decoration:underline}
   .zoom{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;text-align:left;border-radius:14px}
   .zoom .frame{box-shadow:var(--shadow);border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
   .zoom:hover .frame{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
@@ -411,6 +453,7 @@
           <li><svg class="i"><use href="#i-check"/></svg>Segnala i doppioni prima di salvarli</li>
           <li><svg class="i"><use href="#i-check"/></svg>Lo storico di ogni persona resta nella sua scheda</li>
         </ul>
+        <a class="f-link" href="/buste-paga-dipendenti">Come dividere e inviare le buste paga, passo per passo <svg class="i"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="rv">
         <button class="zoom" type="button" data-src="img/buste-paga.webp" data-cap="Le buste paga del mese, con la società riconosciuta e lo stato dell'invio">
